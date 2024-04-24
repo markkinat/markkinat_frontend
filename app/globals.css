@@ -1,4 +1,17 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  
+@tailwind components;
+@tailwind utilities;
+
+.nft-gradient {
+	background: linear-gradient(
+		101.12deg,
+		#eb1484 27.35%,
+		#c91cc3 99.99%,
+		#c81cc5 100%,
+		#c81cc5 100%
+	);
+}
+
+.white-bg {
+	background: rgba(255, 255, 255, 0.2);
+}
