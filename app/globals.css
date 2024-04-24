@@ -15,3 +15,10 @@
 .white-bg {
 	background: rgba(255, 255, 255, 0.2);
 }
+
+.gradient-text {
+	background: linear-gradient(45deg, #cd1bbb, #0036e6); /* Adjust color stops */
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}

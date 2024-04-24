@@ -84,7 +84,7 @@ const Header = () => {
     </div>
     </div>
       </div>
-      <div className="border-b-[#464545] border-b pt-12 w-11/12 border-dashed m-auto"></div>
+      {/* <div className="border-b-[#464545] border-b pt-12 w-11/12 border-dashed m-auto"></div> */}
       </div> 
   )
 }
