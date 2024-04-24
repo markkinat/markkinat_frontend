@@ -7,7 +7,8 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-  ],daisyui: {
+  ],
+  daisyui: {
     themes: ["light", "dark","dracula", "cupcake", "night", "forest", "business", "black", "corporate"],
   },
   prefix: "",
