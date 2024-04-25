@@ -1,26 +1,32 @@
 "use client"
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Banner from "@/components/sections/Banner";
 import Hotbids from "@/components/sections/Hotbids";
 import Header from "@/components/shared/Header";
 import { useTypewriter } from 'react-simple-typewriter';
 
 // Function to wrap each letter in the text with a span element
-const wrapLettersWithSpan = (text:any) => {
+const wrapLettersWithSpan = (text:any, isTypedText:any) => {
     return text.split('').map((char:any, index:any) => (
-        <span key={index} className={index % 2 === 0 ? 'gradient-text' : ''}>{char}</span>
+        <span key={index} className={`lg:text-7xl md:text-5xl sm:text-3xl text-2xl ${index % 2 === 0 ? 'gradient-text' : ''} ${isTypedText ? 'text-white' : ''}`}>{char}</span>
     ));
 };
 
 export default function Home() {
-    const [text] = useTypewriter({
+    const [typedText, setTypedText] = useState("");
+    
+    const [text, helper] = useTypewriter({
         words: ['Discover', 'Collect', 'Sell', 'and Bid'],
-        loop: 2,
-        delaySpeed: 1000,
+        loop: 3,
+        delaySpeed: 3000,
         typeSpeed: 100,
-        deleteSpeed: 80
+        deleteSpeed: 80,
+        onLoopDone: () => setTypedText('Markinnat')
     });
-    const wrappedText = useMemo(() => wrapLettersWithSpan(text), [text]); // Memoize wrapped text
+    const { isDone } = helper
+    
+    const wrappedText = useMemo(() => wrapLettersWithSpan(text, false), [text]); // Memoize wrapped text
+    const typedTextSpan = useMemo(() => wrapLettersWithSpan(typedText, true), [typedText]); // Memoize typed text
 
     return (
         <main className="min-h-screen min-w-full">
@@ -29,7 +35,7 @@ export default function Home() {
                 <Banner
                     name={(<>
                         <span className="lg:text-7xl md:text-5xl sm:text-3xl text-2xl">
-                            {wrappedText}
+                            {!isDone? wrappedText: typedTextSpan}
                         </span>
                         <br /> extraordinary NFTs
                     </>)}

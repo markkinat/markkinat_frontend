@@ -19,12 +19,12 @@ const Hotbids = () => {
     }, []); 
 
     return (
-        <div className='py-12'>
-            <div className='mb-6'>
-                <h3> Hotbids</h3>
+        <div className='py-14 px-2'>
+            <div className='font-poppins font-semibold text-2xl'>
+                <h3>Hot Bids</h3>
            </div>
-            <div className="mt-3 w-full flex flex-wrap justify-start md:justify-center">
-            {[1, 2, 3].map((i) => (
+            <div className="pt-4 w-full flex flex-wrap justify-center md:justify-start">
+            {[1, 2, 3, 4].map((i) => (
                 <NFTCard
                     key={`nft-${i}`}
                     nft={{
