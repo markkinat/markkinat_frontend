@@ -27,7 +27,17 @@
 .image {
 	object-fit: cover; /* or any other value that suits your layout */
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
 
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+	scroll-behavior: smooth;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
 .flexCenter {
 	display: flex;
 	justify-content: center;

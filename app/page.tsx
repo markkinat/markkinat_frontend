@@ -1,10 +1,9 @@
 "use client"
 import React, { useMemo, useState } from 'react';
 import Banner from "@/components/sections/Banner";
-import Hotbids from "@/components/sections/Hotbids";
-import Header from "@/components/shared/Header";
 import { useTypewriter } from 'react-simple-typewriter';
-import Footer from '@/components/shared/Footer';
+import NFTSection from '@/components/sections/NFTSection';
+import TopSeller from '@/components/sections/TopSeller';
 
 // Function to wrap each letter in the text with a span element
 const wrapLettersWithSpan = (text:any, isTypedText:any) => {
@@ -43,7 +42,9 @@ export default function Home() {
                     childStyles="md:text-4xl sm:text-2xl text-xl text-left"
                     parentStyle="justify-start sm:h-72 xs:h-60 xs:p-12 p-4 h-44 rounded-3xl"
                 />
-                <Hotbids />               
+                <NFTSection name={"MKNDAO Collections"} />  
+                <NFTSection name={"Hot Bids"} />
+                <TopSeller />
             </div>
         </main>
     );
