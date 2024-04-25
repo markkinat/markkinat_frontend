@@ -30,12 +30,13 @@ const Header = () => {
         
         <li><a>DAO</a></li>
         <li><a>Mint</a></li>
+        <li><a className="btn btn-secondary rounded-2xl hover:text-white hover:bg-transparent text-sm">Connect Wallet</a></li>       
       </ul>
       
         </div>
         <div className="cursor-pointer flex items-center">
            <Image src={"/logo02.png"} objectFit="contain" width={32} height={32} alt="logo" />
-          <a className="text-2xl px-2 font-bold">Markkinat</a>
+          <a className="lg:text-2xl text-xl px-2 font-bold font-poppins">Markkinat</a>
         </div>  
         <div className="form-control hidden md:flex">
           <label className="input input-bordered flex items-center gap-1 md:w-auto xl:w-[450px] 2xl:w-[650px] rounded-2xl">
@@ -80,7 +81,7 @@ const Header = () => {
     </ul>
     <div className="flex gap-4 items-center">
       <a className="btn hidden lg:flex border-secondary rounded-2xl text-sm">Mint</a>
-      <a className="btn btn-secondary rounded-2xl hover:bg-transparent text-sm">Connect Wallet</a>
+      <a className="btn btn-secondary hidden lg:flex rounded-2xl hover:text-white hover:bg-transparent text-sm">Connect Wallet</a>
     </div>
     </div>
       </div>

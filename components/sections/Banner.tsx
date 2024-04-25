@@ -24,7 +24,7 @@ const Banner = ({ name, childStyles, parentStyle }:any) => {
 
     return (
         <div ref={container} className={`relative w-full flex items-center z-0 overflow-hidden nft-gradient ${parentStyle}`}>
-            <p className={`font-bold lg:text-5xl text-white p-6 leading-10 ${childStyles}`}>{name}</p>
+            <p className={`font-poppins font-bold lg:text-5xl text-white p-6 leading-10 ${childStyles}`}>{name}</p>
             <div className="absolute sm:w-48 sm:h-48 w-32 h-32 rounded-full -top-9 -left-16 -z-5 white-bg" />
             <div className="absolute sm:w-72 sm:h-72 w-56 h-56 rounded-full -bottom-24 -right-14 -z-5 white-bg" />
             <div className="absolute sm:w-80 sm:h-80 w-72 h-72 rounded-full -top-10 -left-20 -z-5 white-bg" />
