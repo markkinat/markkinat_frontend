@@ -27,8 +27,39 @@
 .image {
 	object-fit: cover; /* or any other value that suits your layout */
 }
+
+.flexCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .flexBetween {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.flexStart {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.flexStartCenter {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.flexBetweenStart {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.flexCenterStart {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 }
