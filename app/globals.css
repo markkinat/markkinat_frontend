@@ -1,13 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--font-sora: "Sora", sans-serif;
+	--font-code: "Source Code Pro", monospace;
+	--font-grotesk: "Space Grotesk", sans-serif;
+}
+
+* {
+	scroll-behavior: smooth;
+}
+
 .nft-gradient {
 	background: linear-gradient(
 		101.12deg,
-		#eb1484 27.35%,
+		#551061 27.35%,
+		#581963 50%,
 		#c91cc3 99.99%,
 		#c81cc5 100%,
 		#c81cc5 100%
@@ -15,11 +29,11 @@
 }
 
 .white-bg {
-	background: rgba(255, 255, 255, 0.2);
+	background: #ffffff33;
 }
-
+/* 0036e6 131538 c81cc5*/
 .gradient-text {
-	background: linear-gradient(45deg, #cd1bbb, #0036e6); /* Adjust color stops */
+	background: linear-gradient(45deg, #fff, #c81cc5);
 	background-clip: text;
 	-webkit-background-clip: text;
 	color: transparent;
@@ -72,4 +86,73 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+}
+
+@layer base {
+	body {
+		@apply font-sans bg-n-8 text-n-1 text-base;
+	}
+}
+
+.rotate-45 {
+	@apply rotate-[45deg];
+}
+
+.rotate-90 {
+	@apply rotate-[90deg];
+}
+.-rotate-45 {
+	@apply rotate-[-45deg];
+}
+
+.-rotate-90 {
+	@apply rotate-[-90deg];
+}
+
+.rotate-135 {
+	@apply rotate-[135deg];
+}
+
+.rotate-180 {
+	@apply rotate-[180deg];
+}
+
+.rotate-225 {
+	@apply rotate-[225deg];
+}
+
+.rotate-270 {
+	@apply rotate-[270deg];
+}
+
+.rotate-315 {
+	@apply rotate-[315deg];
+}
+
+.rotate-360 {
+	@apply rotate-[360deg];
+}
+
+.-rotate-135 {
+	@apply rotate-[-135deg];
+}
+
+.-rotate-180 {
+	@apply rotate-[-180deg];
+}
+
+.-rotate-225 {
+	@apply rotate-[-225deg];
+}
+
+.-rotate-270 {
+	@apply rotate-[-270deg];
+}
+
+.-rotate-315 {
+	@apply rotate-[-315deg];
+}
+
+.-rotate-360 {
+	@apply rotate-[-360deg];
 }

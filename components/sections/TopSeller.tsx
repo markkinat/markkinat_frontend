@@ -60,7 +60,7 @@ const TopSeller = () => {
 
     return (
         <div>
-            <h1 className="font-poppins text-2xl lg:text-3xl font-semibold ml-4 xs:ml-0">Top Sellers</h1>
+            <h1 className="font-poppins text-2xl font-semibold ml-4 xs:ml-0">Top Sellers</h1>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                 <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none" ref={scrollRef}>
                     {[1, 2, 3, 4, 5].map((i) => (
@@ -74,10 +74,10 @@ const TopSeller = () => {
                     ))}
                     {!hideButtons && (
                         <>
-                            <div onClick={() => handleScroll('left')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-45 cursor-pointer left-0">
+                            <div onClick={() => handleScroll('left')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-[45%] cursor-pointer left-0">
                                 <Image src={"/left.png"} layout="fill" objectFit="contain" alt="left_arrow" className={theme === 'cupcake' ? 'filter invert' : undefined} />
                             </div>
-                            <div onClick={() => handleScroll('right')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-45 cursor-pointer right-0">
+                            <div onClick={() => handleScroll('right')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-[45%] cursor-pointer right-0">
                                 <Image src={"/right.png"} layout="fill" objectFit="contain" alt="left_arrow" className={theme === 'cupcake' ? 'filter invert' : undefined} />
                             </div>
                         </>

@@ -6,8 +6,8 @@ const CreatorCard = ({ rank, creatorImage, creatorAddress, creatorEths }: any) =
     const { theme } = useTheme();
 
     return (
-        <div className={`min-w-[190px] lg:min-w-[240px] ${theme === 'dark' ? 'bg-nft-black-3 border-nft-black-3' : 'bg-white border-nft-gray-1'} border rounded-3xl flex flex-col p-4 m-4`}>
-            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-nft-red-violet flexCenter">
+        <div className={`min-w-[190px] lg:min-w-[240px] ${theme === 'dark' ? 'bg-nft-black-3 border-nft-black-3' : 'bg-white border-nft-gray-1'} border rounded-3xl flex flex-col p-4 m-4 shadow-md`}>
+            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-nft-deep flexCenter">
                 <p className="font-poppins text-white font-semibold text-base lg:text-lg">{rank}</p>
             </div>
 

@@ -6,7 +6,7 @@ const NFTCard = ({ nft }: any) => {
     const { theme } = useTheme()
   return (
       <Link href={"/"}>
-          <div className={`flex-1 min-w-64 max-w-max xs:max-w-none sm:w-full sm:min-w-40 md:min-w-64 lg:min-w-[300px] ${theme === 'dark' ? 'bg-nft-black-3' : 'bg-white'} rounded-2xl p-4 lg:my-8 lg:mr-8 sm:my-2 sm:mx-2 cursor-pointer shadow-md`}
+          <div className={`flex-1 min-w-64 max-w-max xs:max-w-none sm:w-full sm:min-w-40 md:min-w-64 lg:min-w-[300px] ${theme === 'dark' ? 'bg-[#2e2b44] shadow-2xl' : 'bg-white shadow-md'} rounded-2xl p-4 lg:my-8 lg:mr-8 sm:my-2 sm:mx-2 cursor-pointer  shadow-[#251e67]`}
             >
                 <div className="relative w-full h-52 sm:h-36 xs:h-56 md:h-60 lg:h-[300px] rounded-2xl overflow-hidden">
                     <Image src={nft.image || `/nft${nft.i}.png`} fill className='image' alt="nft01" />

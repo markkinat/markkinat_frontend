@@ -18,7 +18,7 @@ const NFTSection = ({name}:any) => {
 
     return (
         <div className='py-14 px-2'>
-            <div className='font-poppins font-semibold text-3xl'>
+            <div className='font-poppins font-semibold text-2xl'>
                 <h3>{name}</h3>
            </div>
             <div className="pt-4 w-full flex flex-wrap justify-center md:justify-start">
@@ -35,7 +35,8 @@ const NFTSection = ({name}:any) => {
                     }}
                 />
             ))}
-                </div>
+            </div>
+            
         </div>
     );
 };
