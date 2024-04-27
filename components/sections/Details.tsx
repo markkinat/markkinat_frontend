@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 const Details = () => {
     return (
         <div className='my-[4rem] text-center'>
-            <div>
+            <div className='z-10'>
                 <Button className='px-24 rounded-md'>
                     Load More
                 </Button>

@@ -17,7 +17,7 @@ const NFTSection = ({name}:any) => {
     }, []); 
 
     return (
-        <div className='py-14 px-2'>
+        <div className='py-14 px-2 z-10'>
             <div className='font-poppins font-bold text-2xl'>
                 <h3>{name}</h3>
            </div>
