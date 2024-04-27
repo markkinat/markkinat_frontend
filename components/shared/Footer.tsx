@@ -28,10 +28,10 @@ const Footer = () => {
                         <p className={`${theme === 'dark' ? 'text-white' : 'text-nft-dark'} font-semibold text-lg ml-1`}>Markinnat</p>
                     </div>
                     <p className={`font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-semibold text-base mt-6`}>Get the latest updates</p>
-                    <div className={`flexBetween md:w-full lg:w-[557px] w-[357px] mt-6 ${theme === 'dark' ? 'bg-nft-black-2' : 'bg-white'} border ${theme === 'dark' ? 'border-nft-black-2' : 'border-nft-gray-2'} rounded-md`}>
-                        <input type="email" placeholder="Your Email" className={`h-full flex-1 w-full ${theme === 'dark' ? 'bg-nft-black-2' : 'bg-white'} px-4 rounded-md font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-normal text-xs lg:text-lg outline-none`} />
+                    <div className={`flexBetween md:w-[400px] w-[357px] mt-6 ${theme === 'dark' ? 'bg-transparent' : 'bg-white'} border ${theme === 'dark' ? 'border-nft-black-2' : 'border-nft-gray-2'} rounded-md`}>
+                        <input type="email" placeholder="Your Email" className={`h-full flex-1 w-full ${theme === 'dark' ? 'bg-transparent' : 'bg-white'} px-4 rounded-md font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-normal text-xs lg:text-lg outline-none`} />
                         <div className="flex-initial">
-                            <Button className="rounded-md btn-primary">Email me</Button>
+                            <Button className="rounded-md btn-primary px-6 rounded-l-lg">Email me</Button>
                         </div>
                     </div>
                 </div>
