@@ -260,7 +260,7 @@ export function TopCollection() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className={`rounded-md border ${theme === "dark"? "text-white":"text-black"}`}>
+      <div className={`rounded-md border ${theme === "dark"? "text-[#ffffff]/70":"text-black"}`}>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
