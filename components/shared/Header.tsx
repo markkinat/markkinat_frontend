@@ -12,25 +12,6 @@ const Header = () => {
     <div className="mt-2">
       <div className={`fixed top-0 z-50 navbar ${theme === 'dark' ? 'bg-[#0e0c15]/80' : 'bg-base-100'} justify-between py-4`}>
         <div className="px-2 gap-2 items-center">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li>
-                <a>Explore</a>
-                <ul className="p-2">
-                  <li><a>Collections</a></li>
-                  <li><a>MKNDAO</a></li>
-                  <li><a>Hot Bids</a></li>
-                </ul>
-              </li>
-              <li><a>Portfolio1</a></li>
-              <li><a>DAO</a></li>
-              <li><a>Mint</a></li>
-              <li><a className="btn btn-secondary rounded-2xl hover:text-white hover:bg-transparent text-sm">Connect Wallet</a></li>       
-            </ul>
-          </div>
           <div className="cursor-pointer flex items-center">
              <Image src={"/logo02.png"} objectFit="contain" width={32} height={32} alt="logo" />
             <a className="lg:text-2xl text-xl px-2 font-bold font-poppins">Markkinat</a>
@@ -73,8 +54,28 @@ const Header = () => {
             <li><a>DAO</a></li>
           </ul>
           <div className="flex gap-4 items-center">
-            <a className="btn hidden lg:flex border-secondary rounded-2xl text-sm">Mint</a>
-            <a className="btn btn-secondary hidden lg:flex rounded-2xl hover:text-white hover:bg-transparent text-sm">Connect Wallet</a>
+            <a className="hidden lg:flex border-secondary rounded-2xl text-sm">Mint</a>
+            <a className={`btn hidden  hover:bg-transparent lg:flex rounded-2xl ${theme === 'dark' ? 'bg-[#220f2c]/80 hover:text-white' : 'btn-neutral hover:text-black'} text-sm`}>Connect</a>
+          </div>
+
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </div>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              <li>
+                <a>Explore</a>
+                <ul className="p-2">
+                  <li><a>Collections</a></li>
+                  <li><a>MKNDAO</a></li>
+                  <li><a>Hot Bids</a></li>
+                </ul>
+              </li>
+              <li><a>Portfolio1</a></li>
+              <li><a>DAO</a></li>
+              <li><a>Mint</a></li>
+              <li><a className="btn btn-accent rounded-2xl hover:text-white hover:bg-transparent text-sm">Connect</a></li>       
+            </ul>
           </div>
         </div>
       </div>
