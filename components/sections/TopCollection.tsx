@@ -1,9 +1,9 @@
 "use client"
+
 import * as React from "react"
 import {
   CaretSortIcon,
   ChevronDownIcon,
-  DotsHorizontalIcon,
 } from "@radix-ui/react-icons"
 import {
   ColumnDef,
@@ -24,9 +24,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -38,139 +35,159 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useTheme } from "@/app/context/ThemeProvider"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-]
+export type CollectionData = {
+  collection: string;
+  floor: number;
+  floor1dPercent: number;
+  volume: number;
+  topOffer: number;
+  sales: number;
+  marketCap: number;
+  listed: number;
+};
 
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
+// Sample data array
 
-export const columns: ColumnDef<Payment>[] = [
+const data: CollectionData[] = Array.from({ length: 10 }, (_, i)=>(
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
+    collection: "CryptoPunks",
+    floor: 120.5,
+    floor1dPercent: 5,
+    volume: 2000,
+    topOffer: 115,
+    sales: 300,
+    marketCap: 2500000,
+    listed: 55,
+ }));
+ 
+
+
+export const columns: ColumnDef<CollectionData>[] = [
+  {
+    accessorKey: "collection",
+    header: "#Collection",
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{row.getValue("collection")}</div>
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "floor",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
         >
-          Email
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          Floor
+          <CaretSortIcon className="pl-2 h-8 w-8" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("floor")}</div>,
   },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original
-
+   {
+    accessorKey: "floor1dPercent",
+    header: ({ column }) => {
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
+        >
+          Floor 1d %
+          <CaretSortIcon className="pl-2 h-8 w-8" />
+        </Button>
       )
     },
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("floor1dPercent")}</div>,
   },
+    {
+    accessorKey: "volume",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
+        >
+         Volume
+          <CaretSortIcon className="pl-2 h-8 w-8" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("volume")}</div>,
+  },
+  {
+    accessorKey: "topOffer",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
+        >
+         Top Offer
+          <CaretSortIcon className="pl-2 h-8 w-8" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("topOffer")}</div>,
+  },
+  {
+    accessorKey: "sales",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
+        >
+         Sales
+          <CaretSortIcon className="pl-2 h-8 w-8" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("sales")}</div>,
+  },
+  {
+    accessorKey: "marketCap",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
+        >
+         Market Cap
+          <CaretSortIcon className="pl-2 h-8 w-8" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("marketCap")}</div>,
+  }, {
+    accessorKey: "listed",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="text-lg font-bold"
+        >
+         Listed
+          <CaretSortIcon className="pl-2 h-8 w-8" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("listed")}</div>,
+  },
+  
 ]
 
 export function TopCollection() {
+  const { theme } = useTheme()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -199,23 +216,26 @@ export function TopCollection() {
   })
 
   return (
-      <div className="py-3 px-4">
-          <div className="font-poppins font-semibold text-2xl pb-6">
-            <h3>Top Collections</h3>
-          </div>
-        <div className=" w-full bg-base-10 px-2">
+    <div className="pt-8 pb-4 px-2">
+      <div className="font-poppins font-bold text-2xl">
+        <h3>
+          Top Collections
+        </h3>
+      </div>
+
+       <div className="w-full px-4">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter collections..."
+          value={(table.getColumn("collection")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("collection")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm bg-transparent"
+          className={`max-w-sm ${theme === "dark"? "bg-transparent":""}`}
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className={`ml-auto ${theme === "dark"? "bg-transparent":""}`}>
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -240,14 +260,14 @@ export function TopCollection() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className={`rounded-md border ${theme === "dark"? "text-white":"text-black"}`}>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className="text-xl font-bold" key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
