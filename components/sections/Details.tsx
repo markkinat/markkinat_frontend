@@ -5,7 +5,7 @@ const Details = () => {
     return (
         <div className='my-[4rem] text-center'>
             <div>
-                <Button className='px-24 text-base rounded-md'>
+                <Button className='px-24 rounded-md'>
                     Load More
                 </Button>
             </div>
