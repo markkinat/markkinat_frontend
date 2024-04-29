@@ -13,8 +13,8 @@ const sliceAddress = (address: string) => {
 const TopSeller = () => {
     const [slicedSellerAddress, setSlicedSellerAddress] = useState('');
 
-    const parentRef = useRef<HTMLDivElement>(null); // Specify the type as HTMLDivElement
-    const scrollRef = useRef<HTMLDivElement>(null); // Specify the type as HTMLDivElement
+    const parentRef = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null); 
 
     const { theme } = useTheme();
 
@@ -59,11 +59,11 @@ const TopSeller = () => {
     }, []);
 
     return (
-        <div>
+        <div className='pt-8 pb-4 lg:-ml-3'>
             <h1 className="font-poppins text-2xl font-semibold ml-4 xs:ml-0">Top Sellers</h1>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                 <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none" ref={scrollRef}>
-                    {[1, 2, 3, 4, 5].map((i) => (
+                    {[1, 2, 3, 4,6,7,8,9,10].map((i) => (
                         <CreatorCard
                             key={`creator-${i}`}
                             rank={i}

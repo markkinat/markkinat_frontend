@@ -69,7 +69,7 @@ export const columns: ColumnDef<CollectionData>[] = [
     accessorKey: "collection",
     header: "#Collection",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("collection")}</div>
+      <div className="capitalize text-base font-semibold">{row.getValue("collection")}</div>
     ),
   },
   {
@@ -79,14 +79,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className=""
         >
           Floor
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("floor")}</div>,
+    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("floor")}</div>,
   },
    {
     accessorKey: "floor1dPercent",
@@ -95,14 +95,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className=""
         >
           Floor 1d %
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("floor1dPercent")}</div>,
+    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("floor1dPercent")}</div>,
   },
     {
     accessorKey: "volume",
@@ -111,14 +111,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className=""
         >
          Volume
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("volume")}</div>,
+    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("volume")}</div>,
   },
   {
     accessorKey: "topOffer",
@@ -127,14 +127,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className=""
         >
          Top Offer
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("topOffer")}</div>,
+    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("topOffer")}</div>,
   },
   {
     accessorKey: "sales",
@@ -143,14 +143,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className="text-lg font-bold "
         >
          Sales
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("sales")}</div>,
+    cell: ({ row }) => <div className="tlowercase text-base font-semibold flexCenter">{row.getValue("sales")}</div>,
   },
   {
     accessorKey: "marketCap",
@@ -159,14 +159,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className=""
         >
          Market Cap
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("marketCap")}</div>,
+    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("marketCap")}</div>,
   }, {
     accessorKey: "listed",
     header: ({ column }) => {
@@ -174,14 +174,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="text-lg font-bold"
+          className=""
         >
          Listed
-          <CaretSortIcon className="pl-2 h-8 w-8" />
+          <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase flexCenter">{row.getValue("listed")}</div>,
+    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("listed")}</div>,
   },
   
 ]
@@ -223,7 +223,7 @@ export function TopCollection() {
         </h3>
       </div>
 
-       <div className="w-full px-4">
+       <div className="w-full">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter collections..."
@@ -267,7 +267,7 @@ export function TopCollection() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead className="text-xl font-bold" key={header.id}>
+                    <TableHead className="" key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
