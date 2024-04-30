@@ -6,7 +6,7 @@ const CreateProposal = () => {
 
   return (
     <>
-      <div className="w-11/12 mt-24 mb-12">
+      <div className="container mt-24 mb-12">
         <div className="py-10 flex justify-between">
           <div className="w-full pr-5">
             <form className="gap-6 text-white w-full]">

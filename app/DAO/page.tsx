@@ -9,7 +9,7 @@ const DAO = () => {
 
   return (
     <>
-      <div role="tablist" className="tabs tabs-bordered w-11/12 mt-24 mb-12">
+      <div role="tablist" className="tabs tabs-bordered container mt-24 mb-12">
         <input
           type="radio"
           name="my_tabs_1"
