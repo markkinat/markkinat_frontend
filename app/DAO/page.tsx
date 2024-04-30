@@ -1,11 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useTheme } from "../context/ThemeProvider";
+import Link from "next/link";
 
 const DAO = () => {
+  const { theme } = useTheme()
   const router = useRouter();
+
   return (
     <>
-      <div role="tablist" className="tabs tabs-bordered container mt-24">
+      <div role="tablist" className="tabs tabs-bordered w-11/12 mt-24 mb-12">
         <input
           type="radio"
           name="my_tabs_1"
@@ -16,7 +20,7 @@ const DAO = () => {
         />
         <div role="tabpanel" className="tab-content p-10 flex ">
           <div className="flex justify-between items-center">
-            <div className="flex gap-2 text-gray-400 p-2 rounded-3xl bg-[#171919] w-56 justify-between">
+            <div className="flex gap-2 text-gray-400 p-2 rounded-3xl bg-[#0e0c15]/90 w-56 justify-between">
               <div className="flex">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -112,15 +116,15 @@ const DAO = () => {
                 </div>
               </div>
             </div>
-            <div onClick={() => router.push("/DAO/Create")}>
-              <a className="btn hidden lg:flex border-secondary rounded-2xl text-sm text-secondary">
+            <Link href={"/DAO/Create"}>
+              <button className={`btn hidden ${theme === 'dark'? "" :"hover:text-black"} lg:flex border-[#0F172A] rounded-2xl text-sm text-white bg-[#0e0c15]/90`}>
                 New Proposal
-              </a>
-            </div>
+              </button>
+            </Link>
           </div>
 
           <div
-            className="flex flex-col gap-8 my-5 bg-[#171919] rounded-2xl p-5 text-neutral-100"
+            className="flex flex-col gap-8 my-5 bg-[#0e0c15]/90 rounded-2xl p-5 text-neutral-100 cursor-pointer"
             onClick={() => router.push("/DAO/DAO-details")}
           >
             <div className="flex gap-2 items-center justify-between">
@@ -136,7 +140,7 @@ const DAO = () => {
                 </div>
               </div>
               <div className="mr-">
-                <p className="bg-[#68CE78] rounded-xl px-2">Active</p>
+                <p className="bg-[#68CE78] rounded-md px-2">Active</p>
               </div>
             </div>
             <div>

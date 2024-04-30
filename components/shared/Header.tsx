@@ -1,13 +1,11 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/app/context/ThemeProvider";
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
-  const router = useRouter();
 
   return (
     <div className="mt-2">
@@ -99,7 +97,7 @@ const Header = () => {
                 <summary>Explore</summary>
                 <ul className="p-2">
                   <li>
-                    <a>Collections</a>
+                    <Link href={"/top-collection"}>Collections</Link>
                   </li>
                   <li>
                     <a>MKNDAO</a>
@@ -113,8 +111,8 @@ const Header = () => {
             <li>
               <a>Portfolio</a>
             </li>
-            <li onClick={() => router.push("/DAO")}>
-              <a>DAO</a>
+            <li>
+              <Link href={"/DAO"}>DAO</Link>
             </li>
           </ul>
           <div className="flex gap-4 items-center">
@@ -122,7 +120,7 @@ const Header = () => {
               Mint
             </a>
             <a
-              className={`btn hidden  hover:bg-transparent lg:flex rounded-2xl ${
+              className={`btn hidden hover:bg-transparent lg:flex rounded-2xl ${
                 theme === "dark"
                   ? "bg-[#220f2c]/80 hover:text-white"
                   : "btn-neutral hover:text-black"
