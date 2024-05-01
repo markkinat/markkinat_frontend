@@ -81,7 +81,7 @@ const Home = () => {
 
         <div className="flexCenter flex-col -mt-20 z-0">
           <div className="flexCenter w-40 h-40 sm:w-36 sm:h-36 p-1 bg-nft-black-2 rounded-full relative">
-            <Image src={"/nft1.png"} alt='creator' fill className="rounded-full object-cover absolute" objectFit="cover" />
+            <Image src={"/creator3.png"} alt='creator' fill className="rounded-full object-cover absolute" objectFit="cover" />
           </div>
           <p className={`font-poppins ${theme==="dark"?"text-white":"text-nft-black-1"} font-semibold text-2xl mt-6`}>{"0xbbd....5cd"}</p>
         </div>
@@ -89,7 +89,7 @@ const Home = () => {
 
       {(!isLoading && nfts.length === 0) ? (
         <div className="flexCenter sm:p-4 p-16">
-          <h1 className={`font-poppins ${theme ==="dark"?"text-white":"text-nft-black-1"} text-3xl font-extrabold`}>No NFTs Collections</h1>
+          <h1 className={`font-poppins ${theme ==="dark"?"text-white":"text-nft-black-1"} text-3xl font-extrabold`}>No NFTs owned</h1>
         </div>
       ) : (
         <div className="sm:px-4 p-12 w-full minmd:w-4/5 flexCenter flex-col">
