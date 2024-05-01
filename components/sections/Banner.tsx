@@ -16,8 +16,8 @@ const Banner = ({ name, childStyles, parentStyle }:any) => {
     }, []);
 
     return (
-        <div className={`w-full flex items-center z-0 overflow-hidden ${theme ==='dark'? "":"nft-gradient relative"}  ${parentStyle}`}>
-            <p className={`font-poppins font-bold lg:text-5xl text-white p-6 leading-10 ${childStyles}`}>{name}</p>
+        <div className={`w-full flex items-center z-0 overflow-hidden ${theme ==='dark'? "":"nft-gradient relative mb-8"}  ${parentStyle}`}>
+            <p className={`font-poppins font-bold text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white p-6 lg:leading-10 ${childStyles}`}>{name}</p>
             {theme === 'dark' ? "" : <>
             <div className="absolute sm:w-48 sm:h-48 w-32 h-32 rounded-full -top-9 -left-16 -z-5 white-bg" />
             <div className="absolute sm:w-72 sm:h-72 w-56 h-56 rounded-full -bottom-24 -right-14 -z-5 white-bg" />

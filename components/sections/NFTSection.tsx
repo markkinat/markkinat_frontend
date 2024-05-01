@@ -62,7 +62,7 @@ const NFTSection = ({ name }: any) => {
                 <h3>{name}</h3>
             </div>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
-                <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none justify-center md:justify-start" ref={scrollRef}>
+                <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none justify-start" ref={scrollRef}>
                     {[1, 2, 3, 4, 5,7,8,9,10].map((i) => (
                         <NFTCard
                             key={`nft-${i}`}
@@ -78,7 +78,7 @@ const NFTSection = ({ name }: any) => {
                     ))}
                     {!hideButtons && (
                         <div className='z-2'>
-                            <div onClick={() => handleScroll('left')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-[42%] cursor-pointer -left-6">
+                            <div onClick={() => handleScroll('left')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-[42%] cursor-pointer lg:-left-6 -left-">
                                 <Image src={"/left.png"} layout="fill" objectFit="contain" alt="left_arrow" className={theme === 'cupcake' ? 'filter invert' : undefined} />
                             </div>
                             <div onClick={() => handleScroll('right')} className="absolute w-8 h-8 lg:w-12 lg:h-12 top-[42%] cursor-pointer right-0">

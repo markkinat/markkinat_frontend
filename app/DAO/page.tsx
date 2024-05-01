@@ -8,8 +8,8 @@ const DAO = () => {
   const router = useRouter();
 
   return (
-    <>
-      <div role="tablist" className="tabs tabs-bordered container mt-24 mb-12">
+    <div className="container m-auto">
+      <div role="tablist" className="tabs tabs-bordered mt-24 mb-12">
         <input
           type="radio"
           name="my_tabs_1"
@@ -150,7 +150,7 @@ const DAO = () => {
                 ad minim veniam, quis nostrud exercitation ullamco nisi ut
                 aliquip ex ea commodo consequat.
               </h3>
-              <p className="mt-2">
+              <p className="mt-2 leading-7">
                 Proposal Category: Sed ut perspiciatis unde omnis iste natus
                 error sit voluptatem accusantium doloremque laudantium, totam
                 rem aperiam, eaque ipsa quae ab illo inventore veritatis et
@@ -179,7 +179,7 @@ const DAO = () => {
           Tab content 2
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

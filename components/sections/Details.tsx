@@ -1,15 +1,14 @@
-import React from 'react'
 import { Button } from '../ui/button'
 
 const Details = () => {
     return (
         <div className='my-[4rem] text-center'>
             <div className='z-10'>
-                <Button className='px-24 rounded-md'>
+                <Button className='px-24 rounded-md bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black'>
                     Load More
                 </Button>
             </div>
-            <div className="container relative z-2 lg:mt-[10rem]">
+            <div className="container relative z-2 lg:mt-[10rem] mt-[6rem]">
                 <div className="hidden relative justify-center mb-[6.5rem] lg:flex">
                     <img
                         src={"/sphere.png"}
@@ -30,9 +29,9 @@ const Details = () => {
                 </div>
                     <div className='text-center'>
                     <div className='font-bold text-5xl'>
-                        <h2 className='leading-7'>THE ULTIMATE NFT MARKETPLACE</h2>
+                        <h2 className='lg:leading-7 font-code'>THE ULTIMATE NFT MARKETPLACE</h2>
                     </div>
-                            <div className='mt-6 text-xl font-medium flex flex-wrap max-w-[56%] item-center justify-center m-auto'>
+                            <div className='mt-6 text-xl font-medium flex flex-wrap max-w-[56%] item-center justify-center m-auto font-code'>
                                 <p>
                                     Say goodbye to delays. Trade faster, empower DAOs, transact gaslessly, and bid without loss on Markkinat.
                                 </p>

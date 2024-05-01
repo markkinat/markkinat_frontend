@@ -8,13 +8,75 @@ const Header = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="mt-2">
+    <div className="mt-2 max-w-full">
       <div
         className={`fixed top-0 z-50 navbar ${
           theme === "dark" ? "bg-[#0e0c15]/80" : "bg-base-100"
-        } justify-between py-4`}
+        } justify-between pb-2`}
       >
         <div className="px-2 gap-2 items-center">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-9 w-9"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 justify-end font-grotesk"
+            >
+              <li>
+                <a>Explore</a>
+                <ul className="p-2">
+                  <li>
+                   <Link href={"/top-collection"}>Collections</Link>
+                  </li>
+                  <li>
+                    <Link href={"/mkndao"}>MKNDAO</Link>
+                  </li>
+                  <li>
+                    <Link href={"/hot-bids"}>Hot Bids</Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link href={"/portfolio"}>Portfolio</Link>
+              </li>
+              <li>
+               <Link href={"/DAO"}>DAO</Link>
+              </li>
+              <li>
+               
+              <a>Mint</a>
+              <ul className="p-2">
+                <li>
+                  <Link href={"/launchpad"}>Launchpad</Link>
+                </li>
+                <li>
+                  <Link href={"/presale"}>Presale</Link>
+                </li>
+              </ul>
+             
+              </li>
+              <li>
+                <a className="btn md:hidden bg-[#0e0c15] rounded-xl hover:text-white hover:bg-transparent text-sm">
+                  Connect
+                </a>
+              </li>
+            </ul>
+          </div>
+
           <div className="cursor-pointer flex items-center">
             <Image
               src={"/logo02.png"}
@@ -23,11 +85,11 @@ const Header = () => {
               height={32}
               alt="logo"
             />
-            <a className="lg:text-2xl text-xl px-2 font-bold font-poppins">
+            <Link href={"/"} className="lg:text-3xl text-2xl px-2 font-bold font-grotesk">
               Markkinat
-            </a>
+            </Link>
           </div>
-          <div className={`form-control hidden md:flex`}>
+          {/* <div className={`form-control hidden md:flex`}>
             <label
               className={`${
                 theme === "dark" ? "bg-[#0e0c15]/10" : "bg-base-100"
@@ -52,9 +114,9 @@ const Header = () => {
                 placeholder="Search Item Here"
               />
             </label>
-          </div>
+          </div> */}
         </div>
-        <div className="px-2 items-center">
+        <div className="px-2 items-center lg:w-3/4 justify-end font-code">
           <label className="cursor-pointer grid pr-2 place-items-center">
             <input
               type="checkbox"
@@ -91,7 +153,7 @@ const Header = () => {
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </label>
-          <ul className="hidden lg:flex menu menu-horizontal pr-2 flex-nowrap">
+          <ul className="hidden lg:flex menu menu-horizontal px-6 gap-6 flex-nowrap text-base font-medium">
             <li>
               <details>
                 <summary>Explore</summary>
@@ -100,26 +162,37 @@ const Header = () => {
                     <Link href={"/top-collection"}>Collections</Link>
                   </li>
                   <li>
-                    <a>MKNDAO</a>
+                    <Link href={"/mkndao"}>MKNDAO</Link>
                   </li>
                   <li>
-                    <a>Hot Bids</a>
+                    <Link href={"/hot-bids"}>Hot Bids</Link>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <a>Portfolio</a>
+              <Link href={"/portfolio"}>Portfolio</Link>
             </li>
             <li>
               <Link href={"/DAO"}>DAO</Link>
             </li>
+            <li>
+              <details>
+              <summary>Mint</summary>
+              <ul className="p-2">
+                <li>
+                  <Link href={"/launchpad"}>Launchpad</Link>
+                </li>
+                <li>
+                  <Link href={"/presale"}>Presale</Link>
+                </li>
+              </ul>
+              </details>
+            </li>
           </ul>
-          <div className="flex gap-4 items-center">
-            <a className="hidden lg:flex border-secondary rounded-2xl text-sm">
-              Mint
-            </a>
-            <a
+         
+          {/* <div 
+           
               className={`btn hidden hover:bg-transparent lg:flex rounded-2xl ${
                 theme === "dark"
                   ? "bg-[#220f2c]/80 hover:text-white"
@@ -127,59 +200,15 @@ const Header = () => {
               } text-sm`}
             >
               Connect
-            </a>
-          </div>
+            
+          </div> */}
 
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+
+
+          <div className={`-pr-6 hidden md:block relative before:content-[''] before:block before:w-full before:h-full before:border before:absolute before:rounded-lg ${theme ==="dark"?"before:border-white":"before:border-black"} before:top-1.5 before:left-1.5`}>
+            <div className="flex justify-center items-center rounded-lg font-code px-4 py-2 text-base font-medium z-10 relative border border-black bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black hover:brightness-125">
+              Connect Wallet
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a>Explore</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Collections</a>
-                  </li>
-                  <li>
-                    <a>MKNDAO</a>
-                  </li>
-                  <li>
-                    <a>Hot Bids</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Portfolio1</a>
-              </li>
-              <li>
-                <a>DAO</a>
-              </li>
-              <li>
-                <a>Mint</a>
-              </li>
-              <li>
-                <a className="btn btn-accent rounded-2xl hover:text-white hover:bg-transparent text-sm">
-                  Connect
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

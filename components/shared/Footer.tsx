@@ -25,7 +25,7 @@ const Footer = () => {
                 <div className="flexStart flex-1 flex-col">
                     <div className="flexCenter cursor-pointer">
                         <Image src={"/logo02.png"} objectFit="contain" width={32} height={32} alt="logo" />
-                        <p className={`${theme === 'dark' ? 'text-white' : 'text-nft-dark'} font-semibold text-lg ml-1`}>Markinnat</p>
+                        <p className={`${theme === 'dark' ? 'text-white' : 'text-nft-dark'} font-semibold text-lg ml-1 font-grotesk`}>Markinnat</p>
                     </div>
                     <p className={`font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-semibold text-base mt-6`}>Get the latest updates</p>
                     <div className={`flexBetween md:w-[400px] w-[357px] mt-6 ${theme === 'dark' ? 'bg-transparent' : 'bg-white'} border ${theme === 'dark' ? 'border-nft-black-2' : 'border-nft-gray-2'} rounded-md`}>

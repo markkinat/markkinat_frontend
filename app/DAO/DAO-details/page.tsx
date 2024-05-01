@@ -264,7 +264,7 @@ const DAODetails = () => {
                   <h3 className="">1.3K VOTES 99.53%</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  <p className="w-[98.53%] h-3 bg-white rounded-3xl"></p>
+                  <p className={`${theme === 'dark' ? "bg-white" : "bg-secondary"} w-[98.53%] h-3 rounded-3xl`}></p>
                 </div>
               </div>
               <div className="mt-3">
@@ -273,7 +273,7 @@ const DAODetails = () => {
                   <h3 className="">6 VOTES 0.47%</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  <p className="w-[1%] h-3 bg-white rounded-3xl"></p>
+                  <p className={`${theme === 'dark' ? "bg-white" : "bg-secondary"} w-[3%] h-3 rounded-3xl`}></p>
                 </div>
               </div>
               <div className="mt-3">
@@ -282,7 +282,7 @@ const DAODetails = () => {
                   <h3 className="">0 VOTES 0%</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  {/* <p className="w-[98.53%] h-3 bg-white rounded-3xl"></p> */}
+                  {/* <p className={`${theme === 'dark' ? "bg-white" : "bg-secondary"} w-[98.53%] h-3 rounded-3xl`}></p> */}
                 </div>
               </div>
             </div>

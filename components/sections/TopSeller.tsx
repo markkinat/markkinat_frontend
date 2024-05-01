@@ -59,7 +59,7 @@ const TopSeller = () => {
     }, []);
 
     return (
-        <div className='pt-8 pb-4 lg:-ml-3'>
+        <div className='pt-8 pb-4 -ml-3'>
             <h1 className="font-poppins text-2xl font-semibold ml-4 xs:ml-0">Top Sellers</h1>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                 <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none" ref={scrollRef}>
