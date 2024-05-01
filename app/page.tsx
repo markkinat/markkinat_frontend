@@ -1,12 +1,12 @@
 "use client"
 import React, { useMemo, useState } from 'react';
-import Banner from "@/components/sections/Banner";
 import { useTypewriter } from 'react-simple-typewriter';
 import NFTSection from '@/components/sections/NFTSection';
 import TopSeller from '@/components/sections/TopSeller';
 import { BackgroundCircles } from '@/components/designs/Home';
 import Details from '@/components/sections/Details';
 import { TopCollection } from '@/components/shared/TopCollection';
+import Banner from '@/components/shared/Banner';
 
 // Function to wrap each letter in the text with a span element
 const wrapLettersWithSpan = (text:any, isTypedText:any) => {
