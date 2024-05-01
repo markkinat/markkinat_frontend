@@ -1,5 +1,6 @@
 "use client"
 
+import { configureWeb3Modal } from "@/connection";
 import { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext({ theme: "dark", toggleTheme: () => {} });
@@ -12,6 +13,8 @@ export const ThemeProvider = ({ children }:any) => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "cupcake" : "dark"));
   };
+
+  configureWeb3Modal();
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
