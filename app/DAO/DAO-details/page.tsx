@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { useTheme } from "@/app/context/ThemeProvider";
 import { Button } from "@/components/ui/button";
 
 const DAODetails = () => {
-    const { theme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -18,7 +18,11 @@ const DAODetails = () => {
               </div>
             </div>
             <div>
-              <h3 className={`${theme ==='dark'? "" : "text-black"} text-2xl font-bold`}>
+              <h3
+                className={`${
+                  theme === "dark" ? "" : "text-black"
+                } text-2xl font-bold`}
+              >
                 #32 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 ad minim veniam, quis nostrud exercitation ullamco nisi ut
@@ -28,8 +32,14 @@ const DAODetails = () => {
               <div className="flex items-center justify-between">
                 <div className="flex gap-3 py-4 items-center">
                   <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
-                  <p className={theme ==='dark'? "" : "text-black"}>Web3BridgeDAODetails</p>
-                  <p className={`${theme ==='dark'? "" : "text-black"} border-[0.5px] border-neutral-700 rounded-xl px-2`}>
+                  <p className={theme === "dark" ? "" : "text-black"}>
+                    Web3BridgeDAODetails
+                  </p>
+                  <p
+                    className={`${
+                      theme === "dark" ? "" : "text-black"
+                    } border-[0.5px] border-neutral-700 rounded-xl px-2`}
+                  >
                     core
                   </p>
                 </div>
@@ -43,37 +53,48 @@ const DAODetails = () => {
                   >
                     <path
                       d="M12 5L11.6464 4.64645L12 4.29289L12.3536 4.64645L12 5ZM12.5 14C12.5 14.2761 12.2761 14.5 12 14.5C11.7239 14.5 11.5 14.2761 11.5 14L12.5 14ZM6.64645 9.64645L11.6464 4.64645L12.3536 5.35355L7.35355 10.3536L6.64645 9.64645ZM12.3536 4.64645L17.3536 9.64645L16.6464 10.3536L11.6464 5.35355L12.3536 4.64645ZM12.5 5L12.5 14L11.5 14L11.5 5L12.5 5Z"
-                      fill={theme ==='dark'? "#FFFFFF" : "#000000"}
+                      fill={theme === "dark" ? "#FFFFFF" : "#000000"}
                     />
                     <path
                       d="M5 16L5 17C5 18.1046 5.89543 19 7 19L17 19C18.1046 19 19 18.1046 19 17V16"
-                      stroke={theme ==='dark'? "#FFFFFF" : "#000000"}
+                      stroke={theme === "dark" ? "#FFFFFF" : "#000000"}
                     />
                   </svg>
 
-                  <h3 className={`${theme ==='dark'? "" : "text-black"} px-2`}>share</h3>
-                  <h3 className={theme ==='dark'? "" : "text-black"}>...</h3>
+                  <h3
+                    className={`${theme === "dark" ? "" : "text-black"} px-2`}
+                  >
+                    share
+                  </h3>
+                  <h3 className={theme === "dark" ? "" : "text-black"}>...</h3>
                 </div>
               </div>
-              <div className={`${theme ==='dark'? "" : "text-black"} leading-7`}>
-              <h3 className="">Proposal Category: Treasury Stewardship</h3>
-              <h3 className="">Adekunle Stephen - Team Lead</h3>
-              <h3 className="">Apollo - Co-lead</h3>
-              <h3 className="">Okekunle - Senior Dev</h3>
-              <p className="mt-2">
-                Proposal Category: <br /> Sed ut perspiciatis unde omnis iste
-                natus error sit voluptatem accusantium doloremque laudantium,
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
-                et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                fugit, sed quia consequuntur magni dolores eos qui ratione
-                voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-                ipsum quia dolor sit amet, consectetur, adipisci velit,
-              </p>
+              <div
+                className={`${theme === "dark" ? "" : "text-black"} leading-7`}
+              >
+                <h3 className="">Proposal Category: Treasury Stewardship</h3>
+                <h3 className="">Adekunle Stephen - Team Lead</h3>
+                <h3 className="">Apollo - Co-lead</h3>
+                <h3 className="">Okekunle - Senior Dev</h3>
+                <p className="mt-2">
+                  Proposal Description: <br /> Sed ut perspiciatis unde omnis
+                  iste natus error sit voluptatem accusantium doloremque
+                  laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                  inventore veritatis et quasi architecto beatae vitae dicta
+                  sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+                  aspernatur aut odit aut fugit, sed quia consequuntur magni
+                  dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
+                  quisquam est, qui dolorem ipsum quia dolor sit amet,
+                  consectetur, adipisci velit,
+                </p>
               </div>
             </div>
 
-            <div className={`${theme ==='dark'? "" : "text-black"} gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}>
+            <div
+              className={`${
+                theme === "dark" ? "" : "text-black"
+              } gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}
+            >
               <div className="">
                 <h3 className="font-bold text-xl">Cast Your Vote</h3>
               </div>
@@ -93,13 +114,21 @@ const DAODetails = () => {
                 </div>
               </div>
               <div className="mt-4 flexCenter">
-                <Button className={`w-1/2 p-2 rounded-3xl border-[0.5px] ${theme==="dark"? "bg-white text-black": ""} font-bold`}>
+                <Button
+                  className={`w-1/2 p-2 rounded-3xl border-[0.5px] ${
+                    theme === "dark" ? "bg-white text-black" : ""
+                  } font-bold`}
+                >
                   Vote
                 </Button>
               </div>
             </div>
 
-            <div className={`${theme ==='dark'? "" : "text-black"} gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}>
+            <div
+              className={`${
+                theme === "dark" ? "" : "text-black"
+              } gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}
+            >
               <div>
                 <h3 className="font-bold text-xl">Votes</h3>
               </div>
@@ -171,7 +200,6 @@ const DAODetails = () => {
                     View all
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -179,7 +207,13 @@ const DAODetails = () => {
           <div className="ml-2">
             <div className="gap-2 p-6 border-[0.5px] border-neutral-700 w-96 rounded-lg">
               <div className="flex">
-                <h3 className={`${theme==='dark'? "text-white":""} font-bold text-xl`}>Sales live</h3>
+                <h3
+                  className={`${
+                    theme === "dark" ? "text-white" : ""
+                  } font-bold text-xl`}
+                >
+                  Sales live
+                </h3>
               </div>
               <div className="flex justify-between mt-3">
                 <h3>Strategies</h3>
@@ -188,7 +222,13 @@ const DAODetails = () => {
               <div className="flex justify-between mt-2">
                 <h3>IPFS</h3>
                 <div className="flex items-center gap-1">
-                  <h3 className={`${theme==='dark'? "text-white":""} font-semibold px-1`}>#bafkrel</h3>
+                  <h3
+                    className={`${
+                      theme === "dark" ? "text-white" : ""
+                    } font-semibold px-1`}
+                  >
+                    #bafkrel
+                  </h3>
 
                   <svg
                     width="16"
@@ -199,38 +239,54 @@ const DAODetails = () => {
                   >
                     <path
                       d="M14 7.77778V15H1V2H7.5"
-                      stroke={theme==='dark'? "#fff":"#000"}
+                      stroke={theme === "dark" ? "#fff" : "#000"}
                       stroke-width="1.5"
                     />
                     <path
                       d="M15 1V0.25H15.75V1H15ZM6.53033 10.5303C6.23744 10.8232 5.76256 10.8232 5.46967 10.5303C5.17678 10.2374 5.17678 9.76256 5.46967 9.46967L6.53033 10.5303ZM14.25 5.64286V1H15.75V5.64286H14.25ZM15 1.75H9.64286V0.25H15V1.75ZM15.5303 1.53033L6.53033 10.5303L5.46967 9.46967L14.4697 0.46967L15.5303 1.53033Z"
-                      fill={theme==='dark'? "#fff":"#000"}
+                      fill={theme === "dark" ? "#fff" : "#000"}
                     />
                   </svg>
                 </div>
               </div>
               <div className="flex justify-between mt-2">
                 <h3>Voting System</h3>
-                <h3 className={`${theme==='dark'? "text-white":""} font-semibold px-1`}>
+                <h3
+                  className={`${
+                    theme === "dark" ? "text-white" : ""
+                  } font-semibold px-1`}
+                >
                   Single choice voting
                 </h3>
               </div>
               <div className="flex justify-between mt-2">
                 <h3>Start date</h3>
-                <h3 className={`${theme==='dark'? "text-white":""} font-semibold px-1`}>
+                <h3
+                  className={`${
+                    theme === "dark" ? "text-white" : ""
+                  } font-semibold px-1`}
+                >
                   Apr 17, 2024, 7:10 PM
                 </h3>
               </div>
               <div className="flex justify-between mt-2">
                 <h3>End date</h3>
-                <h3 className={`${theme==='dark'? "text-white":""} font-semibold px-1`}>
+                <h3
+                  className={`${
+                    theme === "dark" ? "text-white" : ""
+                  } font-semibold px-1`}
+                >
                   Apr 17, 2024, 7:10 PM
                 </h3>
               </div>
               <div className="flex justify-between mt-2">
                 <h3>Snapshot</h3>
                 <div className="flex items-center">
-                  <h3 className={`${theme==='dark'? "text-white":""} font-semibold px-1`}>
+                  <h3
+                    className={`${
+                      theme === "dark" ? "text-white" : ""
+                    } font-semibold px-1`}
+                  >
                     55,9937,032
                   </h3>
 
@@ -243,18 +299,22 @@ const DAODetails = () => {
                   >
                     <path
                       d="M14 7.77778V15H1V2H7.5"
-                      stroke={theme==='dark'? "#fff":"#000"}
+                      stroke={theme === "dark" ? "#fff" : "#000"}
                       stroke-width="1.5"
                     />
                     <path
                       d="M15 1V0.25H15.75V1H15ZM6.53033 10.5303C6.23744 10.8232 5.76256 10.8232 5.46967 10.5303C5.17678 10.2374 5.17678 9.76256 5.46967 9.46967L6.53033 10.5303ZM14.25 5.64286V1H15.75V5.64286H14.25ZM15 1.75H9.64286V0.25H15V1.75ZM15.5303 1.53033L6.53033 10.5303L5.46967 9.46967L14.4697 0.46967L15.5303 1.53033Z"
-                      fill={theme==='dark'? "#fff":"#000"}
+                      fill={theme === "dark" ? "#fff" : "#000"}
                     />
                   </svg>
                 </div>
               </div>
             </div>
-            <div className={`${theme==='dark'? "text-white":""} gap-2 p-6 border-[0.5px] border-neutral-700 w-96 rounded-lg mt-9`}>
+            <div
+              className={`${
+                theme === "dark" ? "text-white" : ""
+              } gap-2 p-6 border-[0.5px] border-neutral-700 w-96 rounded-lg mt-9`}
+            >
               <div className="flex">
                 <h3 className="font-bold text-xl">Current result</h3>
               </div>
