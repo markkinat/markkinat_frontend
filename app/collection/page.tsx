@@ -5,12 +5,15 @@ import NFTCard from '@/components/shared/NFTCard';
 import SearchBar from '@/components/shared/SearchBar';
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import { useTheme } from '../context/ThemeProvider';
 
 const Home = () => {
   const [nfts, setNfts] = useState<number[] | any>([]);
   const [nftsCopy, setNftsCopy] = useState<number[] | any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeSelect, setActiveSelect] = useState('Recently Added');
+  const { theme } = useTheme();
+  
 
   useEffect(() => {
    ([1, 2, 3, 4, 5,7,8,9,10])
@@ -80,13 +83,13 @@ const Home = () => {
           <div className="flexCenter w-40 h-40 sm:w-36 sm:h-36 p-1 bg-nft-black-2 rounded-full relative">
             <Image src={"/creator2.png"} alt='creator' fill className="rounded-full object-cover absolute" objectFit="cover" />
           </div>
-          <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-2xl mt-6">{"0xbbd....5cd"}</p>
+          <p className={`font-poppins ${theme==="dark"?"text-white":"text-nft-black-1"} font-semibold text-2xl mt-6`}>{"0xbbd....5cd"}</p>
         </div>
       </div>
 
       {(!isLoading && nfts.length === 0) ? (
         <div className="flexCenter sm:p-4 p-16">
-          <h1 className="font-poppins dark:text-white text-nft-black-1 text-3xl font-extrabold">No NFTs owned</h1>
+          <h1 className={`font-poppins ${theme ==="dark"?"text-white":"text-nft-black-1"} text-3xl font-extrabold`}>No NFTs owned</h1>
         </div>
       ) : (
         <div className="sm:px-4 p-12 w-full minmd:w-4/5 flexCenter flex-col">
