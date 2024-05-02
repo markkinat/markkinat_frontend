@@ -21,7 +21,7 @@ const CreateProposal = () => {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label className={`${theme ==='dark'? "" : "text-black"} text-xl`}>Description <span className="text-red-400">*</span></label>
+                <label className={`${theme ==='dark'? "" : "text-black"} text-xl`}>Deadline <span className="text-red-400">*</span></label>
                 <input
                   type="text"
                   className="input border-nft-black-2 bg-[#0e0c15]/90 outline-none w-full placeholder:text-neutral-500 rounded-3xl"
@@ -29,7 +29,7 @@ const CreateProposal = () => {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label className={`${theme ==='dark'? "" : "text-black"} text-xl`}>Discussion <span className="text-red-400">*</span></label>
+                <label className={`${theme ==='dark'? "" : "text-black"} text-xl`}>Description <span className="text-red-400">*</span></label>
                 <textarea
                   className="input border-nft-black-2 bg-[#0e0c15]/90 w-full placeholder:text-neutral-500 rounded-3xl p-3 h-56"
                   placeholder=""

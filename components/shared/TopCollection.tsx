@@ -36,6 +36,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useTheme } from "@/app/context/ThemeProvider"
+import Link from "next/link"
 
 export type CollectionData = {
   collection: string;
@@ -69,7 +70,7 @@ export const columns: ColumnDef<CollectionData>[] = [
     accessorKey: "collection",
     header: "#Collection",
     cell: ({ row }) => (
-      <div className="capitalize text-base font-semibold">{row.getValue("collection")}</div>
+      <Link href={"/collection"} className="capitalize text-base font-semibold cursor-pointer z-10">{row.getValue("collection")}</Link>
     ),
   },
   {
@@ -79,14 +80,14 @@ export const columns: ColumnDef<CollectionData>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className=""
+          className="z-10"
         >
           Floor
           <CaretSortIcon className="pl-2 h-7 w-7" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("floor")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer z-10">{row.getValue("floor")}</Link>,
   },
    {
     accessorKey: "floor1dPercent",
@@ -102,7 +103,7 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("floor1dPercent")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("floor1dPercent")}</Link>,
   },
     {
     accessorKey: "volume",
@@ -118,7 +119,7 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("volume")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("volume")}</Link>,
   },
   {
     accessorKey: "topOffer",
@@ -134,7 +135,7 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("topOffer")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("topOffer")}</Link>,
   },
   {
     accessorKey: "sales",
@@ -150,7 +151,7 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="tlowercase text-base font-semibold flexCenter">{row.getValue("sales")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="tlowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("sales")}</Link>,
   },
   {
     accessorKey: "marketCap",
@@ -166,7 +167,7 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("marketCap")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("marketCap")}</Link>,
   }, {
     accessorKey: "listed",
     header: ({ column }) => {
@@ -181,7 +182,7 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase text-base font-semibold flexCenter">{row.getValue("listed")}</div>,
+    cell: ({ row }) => <Link href={"/collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("listed")}</Link>,
   },
   
 ]
@@ -231,7 +232,7 @@ export function TopCollection() {
           onChange={(event) =>
             table.getColumn("collection")?.setFilterValue(event.target.value)
           }
-          className={`max-w-sm ${theme === "dark"? "bg-transparent":""}`}
+          className={`max-w-sm ${theme === "dark"? "bg-transparent":""} z-10`}
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -261,7 +262,7 @@ export function TopCollection() {
         </DropdownMenu>
       </div>
       <div className={`rounded-md border ${theme === "dark"? "text-[#ffffff]/70":"text-black"}`}>
-        <Table>
+        <Table className="z-10">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

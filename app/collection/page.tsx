@@ -82,7 +82,7 @@ const Home = () => {
             <div className="flexCenter flex-col -mt-20 z-0">
               <div className="flexCenter w-40 h-40 sm:w-36 sm:h-36 p-1 bg-nft-black-2 rounded-full relative">
                 <Image
-                  src={"/creator2.png"}
+                  src={"/nft1.png"}
                   alt="creator"
                   fill
                   className="rounded-full object-cover absolute"

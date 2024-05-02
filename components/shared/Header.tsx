@@ -1,11 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useWeb3Modal, useWeb3ModalAccount } from '@web3modal/ethers/react'
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/app/context/ThemeProvider";
+import { useEffect, useState } from 'react';
+
+const sliceAddress = (address: any) => {
+    if (!address || address.length < 3) return address;
+    return `${address.slice(0, 3)}...${address.slice(-4)}`;
+};
 
 const Header = () => {
+  const [account, setAccount] = useState("")
   const { theme, toggleTheme } = useTheme();
+  const { open } = useWeb3Modal()
+  const { address, chainId } = useWeb3ModalAccount();
+
+  useEffect(() => {
+    setAccount(sliceAddress(address))
+  }, [address])
+  
 
   return (
     <div className="mt-2 max-w-full">
@@ -70,7 +84,8 @@ const Header = () => {
              
               </li>
               <li>
-                <a className="btn md:hidden bg-[#0e0c15] rounded-xl hover:text-white hover:bg-transparent text-sm">
+                <a onClick={() => open()}
+                  className="btn md:hidden bg-[#0e0c15] rounded-xl hover:text-white hover:bg-transparent text-sm cursor-pointer">
                   Connect
                 </a>
               </li>
@@ -205,11 +220,23 @@ const Header = () => {
 
 
 
-          <div className={`-pr-6 hidden md:block relative before:content-[''] before:block before:w-full before:h-full before:border before:absolute before:rounded-lg ${theme ==="dark"?"before:border-white":"before:border-black"} before:top-1.5 before:left-1.5`}>
-            <div className="flex justify-center items-center rounded-lg font-code px-4 py-2 text-base font-medium z-10 relative border border-black bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black hover:brightness-125">
-              Connect Wallet
+          {address ? (
+            <div onClick={() => open({ view: 'Account' })}
+              className={`-pr-6 hidden md:block relative before:content-[''] before:block before:w-full before:h-full before:border before:absolute before:rounded-lg ${theme === "dark" ? "before:border-white" : "before:border-black"} before:top-1.5 before:left-1.5 cursor-pointer`} >
+            <div className="flex justify-center items-center rounded-lg font-code px-4 py-2 text-base font-medium z-10 relative border border-black bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black hover:brightness-125"
+            >
+              <span>{`${chainId} :`}</span>
+              <span className="text-base ml-2">{account}</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div onClick={() => open()}
+              className={`-pr-6 hidden md:block relative before:content-[''] before:block before:w-full before:h-full before:border before:absolute before:rounded-lg ${theme === "dark" ? "before:border-white" : "before:border-black"} before:top-1.5 before:left-1.5 cursor-pointer`}>
+              <div className="flex justify-center items-center rounded-lg font-code px-4 py-2 text-base font-medium z-10 relative border border-black bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black hover:brightness-125">
+                Connect Wallet
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
