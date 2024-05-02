@@ -25,7 +25,7 @@ const Collection = () => {
                   alt="creator"
                   className="rounded-full w-6"
                 />
-                <h3 className="font-bold px-2">Mia's collection</h3>
+                <h3 className="font-bold px-2">Mia&apos;s collection</h3>
               </div>
               <div role="tablist" className="tabs tabs-bordered mt-24 mb-12">
                 <input
@@ -39,7 +39,7 @@ const Collection = () => {
                 <div role="tabpanel" className="tab-content">
                   <h4 className="">
                     Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
+                    typesetting industry. Lorem Ipsum has been the industry&apos;s
                     standard dummy text ever since the 1500s, when an unknown
                     printer took a galley of type and scrambled it to make a
                     type specimen book
