@@ -1,3 +1,5 @@
+"use client";
+import Image from "next/image";
 export interface CheckoutProp {
   action: string;
 }
@@ -5,7 +7,15 @@ export interface CheckoutProp {
 const CheckoutModal = (prop: CheckoutProp) => {
   return (
     <>
-      <button className="btn btn-secondary w-[45%]">{prop.action}</button>
+      <button
+        className="btn btn-secondary w-[45%]"
+        onClick={() => {
+          console.log("ahaaaaaa");
+          (document.getElementById("checkOut") as HTMLFormElement).showModal();
+        }}
+      >
+        {prop.action}
+      </button>
       <dialog id="checkOut" className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
           <h2>Check Out</h2>
@@ -16,7 +26,7 @@ const CheckoutModal = (prop: CheckoutProp) => {
             </div>
             <div className="flex justify-between items-center">
               <div className="flex">
-                <img src="nft1.png" alt="nft1" />
+                <Image src={`/nft1.png`} fill className="image" alt="nft01" />
                 <div>
                   <p className="font-bold">Mia Ayana</p>
                   <p className="">Abstract Smoke Red Blue</p>

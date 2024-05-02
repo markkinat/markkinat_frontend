@@ -1,12 +1,12 @@
 "use client"
 import React, { useMemo, useState } from 'react';
-import Banner from "@/components/sections/Banner";
 import { useTypewriter } from 'react-simple-typewriter';
 import NFTSection from '@/components/sections/NFTSection';
 import TopSeller from '@/components/sections/TopSeller';
 import { BackgroundCircles } from '@/components/designs/Home';
 import Details from '@/components/sections/Details';
 import { TopCollection } from '@/components/shared/TopCollection';
+import Banner from '@/components/shared/Banner';
 
 // Function to wrap each letter in the text with a span element
 const wrapLettersWithSpan = (text:any, isTypedText:any) => {
@@ -33,12 +33,12 @@ export default function Home() {
             <div className="w-11/12 m-auto px-2 py-12">
                 <Banner
                     name={(<>
-                        <span className="lg:text-7xl md:text-5xl sm:text-3xl text-2xl">
+                        <span className="lg:text-7xl md:text-6xl text-2xl sm:text-3xl">
                             {wrappedText}
                         </span>
                         <br /> extraordinary NFTs
                     </>)}
-                    childStyles="md:text-4xl sm:text-2xl text-xl text-left"
+                    childStyles="text-left"
                     parentStyle="justify-center sm:h-72 xs:h-60 xs:p-12 p-4 h-44 rounded-3xl"
                 />
                 <NFTSection name={"MKNDAO Collections"} />
