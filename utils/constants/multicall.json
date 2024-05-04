@@ -124,7 +124,11 @@
         "inputs": [],
         "name": "getCurrentBlockCoinbase",
         "outputs": [
-            { "internalType": "address", "name": "coinbase", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "coinbase",
+                "type": "address"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -146,7 +150,11 @@
         "inputs": [],
         "name": "getCurrentBlockGasLimit",
         "outputs": [
-            { "internalType": "uint256", "name": "gaslimit", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "gaslimit",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -166,11 +174,19 @@
     },
     {
         "inputs": [
-            { "internalType": "address", "name": "addr", "type": "address" }
+            {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+            }
         ],
         "name": "getEthBalance",
         "outputs": [
-            { "internalType": "uint256", "name": "balance", "type": "uint256" }
+            {
+                "internalType": "uint256",
+                "name": "balance",
+                "type": "uint256"
+            }
         ],
         "stateMutability": "view",
         "type": "function"

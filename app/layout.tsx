@@ -4,7 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "./context/ThemeProvider";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
-
+import NFTProvider from "./context/NFTContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,9 +24,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning={true} >
       <body className={inter.className}>
         <ThemeProvider>
+          <NFTProvider>
            <Header />
-          {children} 
-          <Footer />
+              {children} 
+            <Footer />
+            <ToastContainer />
+          </NFTProvider>  
         </ThemeProvider>
       </body>
     </html>

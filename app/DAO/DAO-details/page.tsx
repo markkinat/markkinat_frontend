@@ -1,9 +1,12 @@
 "use client";
+import { useNFTContext } from "@/app/context/NFTContext";
 import { useTheme } from "@/app/context/ThemeProvider";
 import { Button } from "@/components/ui/button";
 
 const DAODetails = () => {
   const { theme } = useTheme();
+  const { useVoteOnProposal:vote } = useNFTContext()
+  
 
   return (
     <>
@@ -99,19 +102,19 @@ const DAODetails = () => {
                 <h3 className="font-bold text-xl">Cast Your Vote</h3>
               </div>
               <div className="mt-3">
-                <div className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button onClick={()=>vote()} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
                   For
-                </div>
+                </Button>
               </div>
               <div className="mt-4">
-                <div className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button onClick={() => vote()} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
                   Against
-                </div>
+                </Button>
               </div>
               <div className="mt-4">
-                <div className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button onClick={() => vote()} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
                   Abstain
-                </div>
+                </Button>
               </div>
               <div className="mt-4 flexCenter">
                 <Button
