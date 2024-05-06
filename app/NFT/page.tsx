@@ -1,14 +1,14 @@
-import CheckoutModal from "@/components/modal/checkoutmodal";
+import CheckoutModal from "@/components/modal/checkoutModal";
 
 const Collection = () => {
   return (
     <div className="mt-24 container">
-      <div className="flex">
+      <div className="lg:flex justify-center">
         <div className="w-[100%] p-12">
-          <img src="nft1.png" alt="NFT" className=" rounded-2xl w-[80%]" />
+          <img src="nft1.png" alt="NFT" className=" rounded-2xl md:w-[80%]" />
         </div>
-        <div className=" w-[35%]">
-          <div className="py-4">
+        <div className=" md:w-[45%] p-12">
+          <div className="">
             <h2 className="text-2xl">Abstract Smoke Red Blue</h2>
             <p>
               from
@@ -37,7 +37,7 @@ const Collection = () => {
                   defaultChecked
                 />
                 <div role="tabpanel" className="tab-content">
-                  <h4 className="">
+                  <h4 className="text-justify">
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry&apos;s
                     standard dummy text ever since the 1500s, when an unknown

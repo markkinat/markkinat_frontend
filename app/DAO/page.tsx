@@ -6,20 +6,17 @@ import Link from "next/link";
 import Loader from "@/components/shared/Loader";
 
 const DAO = () => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const { proposal } = useNFTContext();
 
-   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   // const [proposal, setProposal] = useState({ loading: true, data: [] }); // State variable for proposals
-
 
   useEffect(() => {
     setLoading(proposal.loading);
   }, [proposal]);
 
-
-  console.log("Proposalsssss ",proposal);
-  
+  console.log("Proposalsssss ", proposal);
 
   if (loading) {
     return (
@@ -28,7 +25,7 @@ const DAO = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="container m-auto">
       <div role="tablist" className="tabs tabs-bordered mt-24 mb-12">
@@ -139,13 +136,18 @@ const DAO = () => {
               </div>
             </div>
             <Link href={"/DAO/Create"}>
-              <button className={`btn hidden ${theme === 'dark'? "" :"hover:text-black"} lg:flex border-[#0F172A] rounded-2xl text-sm text-white bg-[#0e0c15]/90`}>
+              <button
+                className={`btn hidden ${
+                  theme === "dark" ? "" : "hover:text-black"
+                } lg:flex border-[#0F172A] rounded-2xl text-sm text-white bg-[#0e0c15]/90`}
+              >
                 New Proposal
               </button>
             </Link>
           </div>
 
-          <Link href={"/DAO/DAO-details"}
+          <Link
+            href={"/DAO/DAO-details"}
             className="flex flex-col gap-8 my-5 bg-[#0e0c15]/90 rounded-2xl p-5 text-neutral-100 cursor-pointer"
           >
             <div className="flex gap-2 items-center justify-between">
