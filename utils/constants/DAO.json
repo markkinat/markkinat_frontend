@@ -142,6 +142,19 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "proposalId",
+                "type": "uint256"
+            }
+        ],
+        "name": "activateProposal",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "string",
                 "name": "_name",
                 "type": "string"
@@ -200,12 +213,38 @@
     },
     {
         "inputs": [],
+        "name": "idsAllowedToVoted",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "owner",
         "outputs": [
             {
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "proposalCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -268,8 +307,13 @@
             },
             {
                 "internalType": "bool",
-                "name": "executed",
+                "name": "isExecuted",
                 "type": "bool"
+            },
+            {
+                "internalType": "enum MarkkinatGovernance.Executed",
+                "name": "executed",
+                "type": "uint8"
             }
         ],
         "stateMutability": "view",

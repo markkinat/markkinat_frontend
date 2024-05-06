@@ -1,10 +1,34 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useNFTContext } from "../context/NFTContext";
 import { useTheme } from "../context/ThemeProvider";
 import Link from "next/link";
+import Loader from "@/components/shared/Loader";
 
 const DAO = () => {
   const { theme } = useTheme()
+  const { proposal } = useNFTContext();
 
+   const [loading, setLoading] = useState(true);
+  // const [proposal, setProposal] = useState({ loading: true, data: [] }); // State variable for proposals
+
+
+  useEffect(() => {
+    setLoading(proposal.loading);
+  }, [proposal]);
+
+
+  console.log("Proposalsssss ",proposal);
+  
+
+  if (loading) {
+    return (
+      <div className="flexCenter min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+  
   return (
     <div className="container m-auto">
       <div role="tablist" className="tabs tabs-bordered mt-24 mb-12">
