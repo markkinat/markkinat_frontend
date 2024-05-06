@@ -1,8 +1,17 @@
 "use client"
+import { useNFTContext } from "@/app/context/NFTContext";
 import { useTheme } from "@/app/context/ThemeProvider";
+import { useState } from "react";
 
 const CreateProposal = () => {
+  const [title, setTitle]: any = useState()
+  const [deadline, setDeadline]:any = useState()
+  const [desc, setDesc]:any = useState()
+
   const { theme } = useTheme();
+  const { createProprosal } = useNFTContext()
+  
+  createProprosal(title, deadline, desc);
 
   return (
     <>
@@ -18,6 +27,8 @@ const CreateProposal = () => {
                   type="text"
                   className="input border border-nft-black-2 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-3xl"
                   placeholder=""
+                  value={title}
+                  onChange={(e)=>setTitle(e.target.value)}
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -26,6 +37,8 @@ const CreateProposal = () => {
                   type="text"
                   className="input border-nft-black-2 bg-[#0e0c15]/90 outline-none w-full placeholder:text-neutral-500 rounded-3xl"
                   placeholder=""
+                  value={deadline}
+                  onChange={(e)=>setDeadline(e.target.value)}
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -33,6 +46,8 @@ const CreateProposal = () => {
                 <textarea
                   className="input border-nft-black-2 bg-[#0e0c15]/90 w-full placeholder:text-neutral-500 rounded-3xl p-3 h-56"
                   placeholder=""
+                  value={desc}
+                  onChange={(e)=>setDesc(e.target.value)}
                 />
                 {/* <ErrorHandler
                         error={errors.name?.type}

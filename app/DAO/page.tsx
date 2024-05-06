@@ -1,11 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useTheme } from "../context/ThemeProvider";
 import Link from "next/link";
 
 const DAO = () => {
   const { theme } = useTheme()
-  const router = useRouter();
 
   return (
     <div className="container m-auto">
@@ -123,9 +121,8 @@ const DAO = () => {
             </Link>
           </div>
 
-          <div
+          <Link href={"/DAO/DAO-details"}
             className="flex flex-col gap-8 my-5 bg-[#0e0c15]/90 rounded-2xl p-5 text-neutral-100 cursor-pointer"
-            onClick={() => router.push("/DAO/DAO-details")}
           >
             <div className="flex gap-2 items-center justify-between">
               <div className="flex items-center">
@@ -164,7 +161,7 @@ const DAO = () => {
                 Ends in 6 days
               </p>
             </div>
-          </div>
+          </Link>
         </div>
 
         <input

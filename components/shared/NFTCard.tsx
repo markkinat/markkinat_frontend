@@ -1,8 +1,10 @@
+import { useNFTContext } from '@/app/context/NFTContext';
 import { useTheme } from '@/app/context/ThemeProvider';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const NFTCard = ({ nft }: any) => {
+    const { nftCurrency} = useNFTContext()
     const { theme } = useTheme()
   return (
       <Link href={"/collection/"} className='z-1'>
@@ -15,7 +17,7 @@ const NFTCard = ({ nft }: any) => {
                    <p className={`font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-semibold text-sm lg:text-xl`}>{nft.name}
                     </p>
                     <div className="flexBetween mt-1 minlg:mt-3 flex-row xs:flex-col xs:items-start xs:mt-3">
-                        <p className={`font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-semibold text-xs lg:text-lg`}>{nft.price}<span className="font-normal"> {`ETH`}</span></p>
+                        <p className={`font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-semibold text-xs lg:text-lg`}>{nft.price}<span className="font-normal"> {nftCurrency}</span></p>
                       <p className={`font-poppins ${theme === 'dark' ? 'text-white' : 'text-nft-black-1'} font-semibold text-xs lg:text-lg`}>
                           {nft.seller}
                       </p>
