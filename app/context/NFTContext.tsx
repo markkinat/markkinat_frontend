@@ -128,9 +128,9 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const useVoteOnProposal = () => {
         return useCallback(async () => {
-            if (!contractGov1 || !address) return;
             try {
-                const transaction = await contractGov1.voteOnProposal();
+                 const contractGov = getDAOContract(readOnlyProvider)
+                const transaction = await contractGov.voteOnProposal();
                 console.log("transaction: ", transaction);
                 const receipt = await transaction.wait();
 
