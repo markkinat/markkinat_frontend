@@ -63,7 +63,7 @@ const Home = () => {
 
   if (isLoading) {
     return (
-      <div className="flexStart min-h-screen mt-24">
+      <div className="flexCenter min-h-screen">
         <Loader />
       </div>
     );

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const DAODetails = () => {
   const { theme } = useTheme();
-  const { useVoteOnProposal:vote } = useNFTContext()
+  // const { useVoteOnProposal:vote } = useNFTContext()
   
 
   return (
@@ -102,17 +102,17 @@ const DAODetails = () => {
                 <h3 className="font-bold text-xl">Cast Your Vote</h3>
               </div>
               <div className="mt-3">
-                <Button onClick={()=>vote()} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button onClick={()=>{}} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
                   For
                 </Button>
               </div>
               <div className="mt-4">
-                <Button onClick={() => vote()} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button onClick={() => {}} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
                   Against
                 </Button>
               </div>
               <div className="mt-4">
-                <Button onClick={() => vote()} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button onClick={() => {}} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
                   Abstain
                 </Button>
               </div>

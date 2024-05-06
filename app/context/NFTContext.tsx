@@ -9,14 +9,15 @@ import { toast } from "react-toastify"
 
 type NFTContextType = {
     nftCurrency: string; 
-    useVoteOnProposal: any; 
+    // useVoteOnProposal: any; 
     createSale: any; 
     fetchNFTs: any; 
     fetchMyNFTsOrCreatedNFTs: any; 
-    useGetProposals: any; 
+    createProprosal: any; 
+    proposal:any
     currentAccount: string | null; 
     isLoadingNFT: boolean; 
-    createProprosal: any;
+    // createProprosal: any;
 };
 
 // Create the context
@@ -35,9 +36,8 @@ export const useNFTContext = () => {
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { chainId, address } = useWeb3ModalAccount();
     const { walletProvider } = useWeb3ModalProvider();
-    const [contractGov1, setContractGov1] = useState<ethers.Contract | null>(null); 
-    const [contractGov2, setContractGov2] = useState<ethers.Contract | null>(null); 
-    const [multicallContract, setMulticallContract] = useState<ethers.Contract | null>(null); 
+    // const [contractGov1, setContractGov1] = useState<ethers.Contract | null>(null); 
+    // const [contractGov2, setContractGov2] = useState<ethers.Contract | null>(null); 
     const [proposal, setProposal] = useState<{ loading: boolean; data: any[] }>({ // Typecasted data to any[]
         loading: true,
         data: [],
@@ -47,27 +47,47 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isLoadingNFT, setIsLoadingNFT] = useState<boolean>(false); 
     const nftCurrency = 'ETH';
 
+    console.log("wallet1", walletProvider);
+    
 
+    // Connect to SmartContract
+    const WRITETOSmartContract = async (contractType:any) => {
+    try {
+    const readWriteProvider = getProvider(walletProvider);
+    const signer = readWriteProvider.getSigner();
+    const contract = contractType(signer);
+    return contract;
+  } catch (error) {
+    console.log(
+      `Ran into an error while connecting to Smart Contract ${error}`
+    );
+  }
+    };
+    
     useEffect(() => {
-        if (walletProvider) {
-            const readWriteProvider = getProvider(walletProvider);
-            const signer = readWriteProvider.getSigner();
-            setContractGov1(getDAOContract(signer));
-            setContractGov2(getDAOContract(readOnlyProvider));
-            setMulticallContract(getMulticallContract(readOnlyProvider));
-        } else {
-            console.error("No wallet provider or unsupported chain");
-        }
-    }, [walletProvider]);
+    const fetchData = async () => {
+        await getProposals();
+    
+    };
+    fetchData();
+  }, []);
 
-    const useGetProposals =() => {
-        useEffect(() => {
-        (async () => {
-        if (!contractGov2 || !multicallContract || !address) return;
-        
+
+    // ///////////////////////
+    ///////     DAO     ////////
+    /////////////////////////
+    const getProposals = async () => {
+    try {
         const itf = new ethers.Interface(Abi1);
-        const data = await contractGov2.proposalCount();
-        const _proposalCount = Number(data.toString());
+
+        const contractGov = getDAOContract(readOnlyProvider)
+        const multicallContract = getMulticallContract(readOnlyProvider)
+
+        // console.log("CONTRACT ", contractGov);
+
+        const data = await contractGov.proposalCount();
+        const _proposalCount = Number(data);
+        console.log("PROPOSAL COUNT ",_proposalCount);
 
         let calls = [];
         for (let i = 0; i < _proposalCount; i++) {
@@ -79,28 +99,31 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
         const callResults = await multicallContract.tryAggregate.staticCall(false, calls);
         const response = callResults.map((res: any) => (itf.decodeFunctionResult("proposals", res[1])));
+
+        console.log("RESPONSE ", response);
+        
         let prop = [];
         for (let i = 0; i < response.length; i++) {
             const obj = response[i][0];
             prop.push({
-                proposalId: Number(obj.proposalId.toString()),
-                forProposal: Number(obj.forProposal.toString()),
-                againstProposal: Number(obj.againstProposal.toString()),
-                totalabstainProposalStaked: Number(obj.abstainProposal.toString()),
-                deadLine: Number(obj.deadLine.toString()),
-                votes: Number(obj.votes.toString()),
+                proposalId: Number(obj.proposalId),
+                forProposal: Number(obj.forProposal),
+                againstProposal: Number(obj.againstProposal),
+                totalabstainProposalStaked: Number(obj.abstainProposal),
+                deadLine: Number(obj.deadLine),
+                votes: Number(obj.votes),
                 executed: obj.executed,
                 name: obj.name,
                 description: obj.description,
                 creator: obj.creator,
             });
         }
-            setProposal({ loading: false, data: prop });
-        })()
-             }, [])
-        return proposal;
-        
-    };
+        setProposal({ loading: false, data: prop });
+    } catch (error) {
+        console.error("Error in getProposals:", error);
+    }
+};
+
 
 
     const useVoteOnProposal = () => {
@@ -124,23 +147,23 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     };
 
     const createProprosal = async(name:string, deadline:any, desc:string) => {
-        if (!contractGov1 || !address) return;
+        try {  
+            if (!isSupportedChain(chainId)) return toast.error("Wrong network");
+            const contractGov = await WRITETOSmartContract(getDAOContract)
+            const transaction = await contractGov.createProposal(name, deadline, desc);
+            console.log("transaction: ", transaction);
+            const receipt = await transaction.wait();
 
-       try {
-                const transaction = await contractGov1.createProposal(name, deadline, desc);
-                console.log("transaction: ", transaction);
-                const receipt = await transaction.wait();
+            console.log("receipt: ", receipt);
 
-                console.log("receipt: ", receipt);
-
-                if (receipt.status) {
-                    return toast.success("Voted Successfully!");
-                } toast.error("Vote Process Failed!");
-            } catch (error) {
-                console.log("error :", error);
-            
-            } 
+            if (receipt.status) {
+                return toast.success("Voted Successfully!");
+            } toast.error("Vote Process Failed!");
+        } catch (error) {
+            console.log("error writing to contract :", error);
         
+        } 
+    
     };
 
     const createSale = () => {
@@ -156,7 +179,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     };
 
     return (
-        <NFTContext.Provider value={{ nftCurrency,createProprosal, useVoteOnProposal, createSale, fetchNFTs, fetchMyNFTsOrCreatedNFTs, useGetProposals, currentAccount, isLoadingNFT }}>
+        <NFTContext.Provider value={{ nftCurrency, createSale, fetchNFTs, fetchMyNFTsOrCreatedNFTs, createProprosal, proposal,currentAccount, isLoadingNFT }}>
             {children}
         </NFTContext.Provider>
     );
