@@ -6,12 +6,11 @@ import { Button } from "@/components/ui/button";
 const DAODetails = () => {
   const { theme } = useTheme();
   // const { useVoteOnProposal:vote } = useNFTContext()
-  
 
   return (
     <>
-      <div className="w-11/12 mt-24 mb-12 m-auto">
-        <div className="p-10 flex">
+      <div className="md:w-11/12 mt-24 mb-12 m-auto">
+        <div className="p-10 md:flex">
           <div className="flex flex-col gap-8 px-5 text-neutral-100">
             <div className="flex gap-2 items-center">
               <div className="flex items-center">
@@ -34,7 +33,7 @@ const DAODetails = () => {
 
               <div className="flex items-center justify-between">
                 <div className="flex gap-3 py-4 items-center">
-                  <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
+                  <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
                   <p className={theme === "dark" ? "" : "text-black"}>
                     Web3BridgeDAODetails
                   </p>
@@ -102,17 +101,26 @@ const DAODetails = () => {
                 <h3 className="font-bold text-xl">Cast Your Vote</h3>
               </div>
               <div className="mt-3">
-                <Button onClick={()=>{}} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button
+                  onClick={() => {}}
+                  className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6"
+                >
                   For
                 </Button>
               </div>
               <div className="mt-4">
-                <Button onClick={() => {}} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button
+                  onClick={() => {}}
+                  className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6"
+                >
                   Against
                 </Button>
               </div>
               <div className="mt-4">
-                <Button onClick={() => {}} className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6">
+                <Button
+                  onClick={() => {}}
+                  className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6"
+                >
                   Abstain
                 </Button>
               </div>
@@ -130,7 +138,7 @@ const DAODetails = () => {
             <div
               className={`${
                 theme === "dark" ? "" : "text-black"
-              } gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}
+              } gap-3 p-2 border-[0.5px] border-neutral-700 rounded-lg mt-9 text-xs md:p-8`}
             >
               <div>
                 <h3 className="font-bold text-xl">Votes</h3>
@@ -139,7 +147,19 @@ const DAODetails = () => {
               <div className="mt-4">
                 <div className="flex gap-2 p-2 items-center justify-between">
                   <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
+                    <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
+                    <p>Web3BridgeDAODetails</p>
+                  </div>
+                  <div>
+                    <h3>For</h3>
+                  </div>
+                  <div>
+                    <h3 className="">1K VOTES</h3>
+                  </div>
+                </div>
+                <div className="flex gap-2 p-2 items-center justify-between">
+                  <div className="flex gap-2">
+                    <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
                     <p>Web3BridgeDAODetails</p>
                   </div>
                   <div>
@@ -151,7 +171,7 @@ const DAODetails = () => {
                 </div>
                 <div className="flex gap-2 p-2 items-center justify-between">
                   <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
+                    <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
                     <p>Web3BridgeDAODetails</p>
                   </div>
                   <div>
@@ -163,7 +183,7 @@ const DAODetails = () => {
                 </div>
                 <div className="flex gap-2 p-2 items-center justify-between">
                   <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
+                    <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
                     <p>Web3BridgeDAODetails</p>
                   </div>
                   <div>
@@ -175,19 +195,7 @@ const DAODetails = () => {
                 </div>
                 <div className="flex gap-2 p-2 items-center justify-between">
                   <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
-                    <p>Web3BridgeDAODetails</p>
-                  </div>
-                  <div>
-                    <h3>For</h3>
-                  </div>
-                  <div>
-                    <h3>1K VOTES</h3>
-                  </div>
-                </div>
-                <div className="flex gap-2 p-2 items-center justify-between">
-                  <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
+                    <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
                     <p>Web3BridgeDAODetails</p>
                   </div>
                   <div>
@@ -220,7 +228,7 @@ const DAODetails = () => {
               </div>
               <div className="flex justify-between mt-3">
                 <h3>Strategies</h3>
-                <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
+                <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
               </div>
               <div className="flex justify-between mt-2">
                 <h3>IPFS</h3>
@@ -327,7 +335,11 @@ const DAODetails = () => {
                   <h3 className="">1.3K VOTES 99.53%</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  <p className={`${theme === 'dark' ? "bg-white" : "bg-secondary"} w-[98.53%] h-3 rounded-3xl`}></p>
+                  <p
+                    className={`${
+                      theme === "dark" ? "bg-white" : "bg-secondary"
+                    } w-[98.53%] h-3 rounded-3xl`}
+                  ></p>
                 </div>
               </div>
               <div className="mt-3">
@@ -336,7 +348,11 @@ const DAODetails = () => {
                   <h3 className="">6 VOTES 0.47%</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  <p className={`${theme === 'dark' ? "bg-white" : "bg-secondary"} w-[3%] h-3 rounded-3xl`}></p>
+                  <p
+                    className={`${
+                      theme === "dark" ? "bg-white" : "bg-secondary"
+                    } w-[3%] h-3 rounded-3xl`}
+                  ></p>
                 </div>
               </div>
               <div className="mt-3">
