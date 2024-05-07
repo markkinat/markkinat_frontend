@@ -12,7 +12,8 @@ const CreateProposal = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(title, Date.parse(deadline), desc);
+    const unixTime = Date.parse(deadline) / 1000
+    console.log(title,unixTime, desc);
   };
 
   return (

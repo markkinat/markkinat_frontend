@@ -1,11 +1,43 @@
 "use client";
 import { useNFTContext } from "@/app/context/NFTContext";
 import { useTheme } from "@/app/context/ThemeProvider";
+import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
-const DAODetails = () => {
+
+const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const { theme } = useTheme();
   // const { useVoteOnProposal:vote } = useNFTContext()
+  const { proposal } = useNFTContext();
+
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [vote, setVote] = useState(2);
+
+  const handleVoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVote(parseInt(e.target.value, 10));
+   };
+  console.log("PARAMSSSSS ", params.daodetailsId);
+  console.log(vote);
+  
+  
+  
+  useEffect(() => {
+    setLoading(proposal.loading);
+    setData(proposal.data[params.daodetailsId])
+  }, [params.daodetailsId, proposal]);
+
+  console.log("Proposalsssss ", proposal.data);
+
+  if (loading) {
+    return (
+      <div className="flexCenter min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
 
   return (
     <>
@@ -91,41 +123,50 @@ const DAODetails = () => {
                 </p>
               </div>
             </div>
-
+{/* 
             <div
               className={`${
                 theme === "dark" ? "" : "text-black"
               } gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}
-            >
+            > */}
+              <div className={`${
+                theme === "dark" ? "" : "text-black"
+              } gap-3 p-8 border-[0.5px] border-neutral-700 rounded-lg mt-9`}>
               <div className="">
                 <h3 className="font-bold text-xl">Cast Your Vote</h3>
               </div>
               <div className="mt-3">
-                <Button
-                  onClick={() => {}}
-                  className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6"
-                >
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    value={2}
+                    checked={vote === 2}
+                    onChange={handleVoteChange}
+                  />
                   For
-                </Button>
-              </div>
-              <div className="mt-4">
-                <Button
-                  onClick={() => {}}
-                  className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6"
-                >
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    value={1}
+                    checked={vote === 1}
+                    onChange={handleVoteChange}
+                  />
                   Against
-                </Button>
-              </div>
-              <div className="mt-4">
-                <Button
-                  onClick={() => {}}
-                  className="w-full p-2 rounded-3xl border-[0.5px] border-neutral-700 px-6"
-                >
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    value={0}
+                    checked={vote === 0}
+                    onChange={handleVoteChange}
+                  />
                   Abstain
-                </Button>
+                </label>
               </div>
               <div className="mt-4 flexCenter">
                 <Button
+                  onClick={() => {}}
                   className={`w-1/2 p-2 rounded-3xl border-[0.5px] ${
                     theme === "dark" ? "bg-white text-black" : ""
                   } font-bold`}
@@ -134,6 +175,7 @@ const DAODetails = () => {
                 </Button>
               </div>
             </div>
+            {/* </div> */}
 
             <div
               className={`${

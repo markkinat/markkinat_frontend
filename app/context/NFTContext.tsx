@@ -13,6 +13,7 @@ import {
 import { ethers } from "ethers";
 import {
   getDAOContract,
+  getMKDAOContract,
   getMulticallContract,
 } from "@/utils/constants/contracts";
 import {
@@ -22,6 +23,7 @@ import {
   wssProvider,
 } from "@/utils/constants/providers";
 import Abi1 from "@/utils/constants/DAO.json";
+import markinattAbi from "@/utils/constants/Markkinat.json";
 import { toast } from "react-toastify";
 
 type NFTContextType = {
@@ -53,7 +55,7 @@ export const useNFTContext = () => {
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { chainId, address } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
-  // const [contractGov1, setContractGov1] = useState<ethers.Contract | null>(null);
+  const [tokens, setTokens] = useState<Number[] | null>(null);
   // const [contractGov2, setContractGov2] = useState<ethers.Contract | null>(null);
   const [proposal, setProposal] = useState<{ loading: boolean; data: any[] }>({
     // Typecasted data to any[]
@@ -83,26 +85,34 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getProposals();
+      await multicalls(address);
     };
     fetchData();
-  }, []);
+  }, [address]);
+
 
   // ///////////////////////
   ///////     DAO     ////////
   /////////////////////////
-  const getProposals = async () => {
+
+  const multicalls = async (account:any) => {
     try {
       const itf = new ethers.Interface(Abi1);
+      const itf2 = new ethers.Interface(markinattAbi);
 
       const contractGov = getDAOContract(readOnlyProvider);
+      const contractMKDAO = getMKDAOContract(readOnlyProvider);
       const multicallContract = getMulticallContract(readOnlyProvider);
 
       // console.log("CONTRACT ", contractGov);
 
       const data = await contractGov.proposalCount();
+      const data2 = await contractMKDAO.tokenIds()
+
       const _proposalCount = Number(data);
-      console.log("PROPOSAL COUNT ", _proposalCount);
+      const tokenCounts = Number(data2)
+      // console.log("PROPOSAL COUNT ", _proposalCount);      
+      // console.log("tokenCounts COUNT ", tokenCounts);
 
       let calls = [];
       for (let i = 0; i < _proposalCount; i++) {
@@ -111,20 +121,36 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           callData: itf.encodeFunctionData("proposals", [i]),
         });
       }
-
+      if (tokenCounts > 0) {
+         for (let i = 1; i < tokenCounts; i++) {
+        calls.push({
+          target: process.env.NEXT_PUBLIC_MarkkinatNFT_address,
+          callData: itf2.encodeFunctionData("ownerOf", [i]),
+        });
+         }
+        
+      }
+     
       const callResults = await multicallContract.tryAggregate.staticCall(
         false,
         calls
       );
-      const response = callResults.map((res: any) =>
-        itf.decodeFunctionResult("proposals", res[1])
-      );
+      // const response = callResults.map((res: any) =>
+      //   itf.decodeFunctionResult("proposals", res[1])
+      // );
 
-      console.log("RESPONSE ", response);
+      let proposalResponse = []
+      let mkdaoResponse = [];
+      for (let i = 0; i < _proposalCount; i++) {
+        proposalResponse.push(itf.decodeFunctionResult("proposals", callResults[i][1]))
+
+      }
+      // console.log("RESPONSE ", proposalResponse);
+
 
       let prop = [];
-      for (let i = 0; i < response.length; i++) {
-        const obj = response[i][0];
+      for (let i = 0; i < proposalResponse.length; i++) {
+        const obj = proposalResponse[i][0];
         prop.push({
           proposalId: Number(obj.proposalId),
           forProposal: Number(obj.forProposal),
@@ -139,8 +165,33 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         });
       }
       setProposal({ loading: false, data: prop });
+
+
+      if (tokenCounts > 0) {
+        if (!isSupportedChain(chainId)) return toast.error("Ensure your wallet is connected, and on right chain");
+        for (let i = _proposalCount; i < callResults.length; i++) {
+        mkdaoResponse.push(itf2.decodeFunctionResult("ownerOf", callResults[i][1]))
+        }
+        // console.log("mkdaoResponse ", mkdaoResponse);
+          
+
+        const accounts = mkdaoResponse.map((res: any) =>res[0])    
+        // console.log("ADDRESS ",account);
+        const myTokens = accounts.map((x, index) => {
+        if (address && x === address) {
+          return index+1;
+        }
+        return -1; 
+      }).filter(index => index !== -1); 
+
+        // console.log("accounts:", accounts);
+        setTokens(myTokens);
+            
+    }
+
+
     } catch (error) {
-      console.error("Error in getProposals:", error);
+      console.error("Error in multicall:", error);
     }
   };
 

@@ -7,7 +7,7 @@ import Loader from "@/components/shared/Loader";
 
 const DAO = () => {
   const { theme } = useTheme();
-  const { proposal } = useNFTContext();
+  const { proposal, } = useNFTContext();
 
   const [loading, setLoading] = useState(true);
   // const [proposal, setProposal] = useState({ loading: true, data: [] }); // State variable for proposals
@@ -147,7 +147,7 @@ const DAO = () => {
           </div>
 
           <Link
-            href={"/DAO/DAO-details"}
+            href={`/DAO/${1}`}
             className="flex flex-col gap-8 my-5 bg-[#0e0c15]/90 rounded-2xl p-5 text-neutral-100 cursor-pointer"
           >
             <div className="flex gap-2 items-center justify-between">
