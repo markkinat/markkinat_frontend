@@ -1,27 +1,31 @@
 "use client";
 import { useNFTContext } from "@/app/context/NFTContext";
 import { useTheme } from "@/app/context/ThemeProvider";
+import NFTToken from "@/components/modal/NFTToken";
 import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-
+// address intiator,
+//         uint256 proposalId,
+//         MarkkinatLibrary.VoterDecision decision,
+//         uint256 _tokenId
 const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const { theme } = useTheme();
-  // const { useVoteOnProposal:vote } = useNFTContext()
-  const { proposal } = useNFTContext();
+  const { proposal,useVoteOnProposal } = useNFTContext();
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [vote, setVote] = useState(2);
+  const [tokenId, setTokenId] = useState()
 
   const handleVoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVote(parseInt(e.target.value, 10));
    };
-  console.log("PARAMSSSSS ", params.daodetailsId);
-  console.log(vote);
+  // console.log("PARAMSSSSS ", params.daodetailsId);
+  // console.log(vote);
   
-  
+  const handleVotes = useVoteOnProposal(params.daodetailsId,vote,tokenId);
   
   useEffect(() => {
     setLoading(proposal.loading);
@@ -165,15 +169,20 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                 </label>
               </div>
               <div className="mt-4 flexCenter">
-                <Button
-                  onClick={() => {}}
-                  className={`w-1/2 p-2 rounded-3xl border-[0.5px] ${
-                    theme === "dark" ? "bg-white text-black" : ""
-                  } font-bold`}
-                >
-                  Vote
-                </Button>
+                <NFTToken handleVote ={handleVotes}
+                  tokenId ={tokenId}
+                  setTokenId = {setTokenId}
+                  Vote={
+                  <Button
+                    className={`w-1/2 p-2 rounded-3xl border-[0.5px] ${theme === "dark" ? "bg-white text-black" : "bg-[#101931]"
+                      } font-bold`}
+                  >
+                 Vote
+                  </Button>}
+                />
               </div>
+
+              
             </div>
             {/* </div> */}
 

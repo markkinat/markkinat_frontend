@@ -28,15 +28,16 @@ import { toast } from "react-toastify";
 
 type NFTContextType = {
   nftCurrency: string;
-  // useVoteOnProposal: any;
+  useVoteOnProposal: any;
   createSale: any;
-  fetchNFTs: any;
   fetchMyNFTsOrCreatedNFTs: any;
   createProprosal: any;
   proposal: any;
   currentAccount: string | null;
   isLoadingNFT: boolean;
-  // createProprosal: any;
+  metaNFTs: any[] | null;
+  myTokenIds: number[] | null;
+  fetchNFTs: any
 };
 
 // Create the context
@@ -55,7 +56,9 @@ export const useNFTContext = () => {
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { chainId, address } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
-  const [tokens, setTokens] = useState<Number[] | null>(null);
+  const [myTokenIds, setMyTokenIds] = useState<number[]>([]);
+
+  const [metaNFTs, setMetaNFTs] = useState<any[] | null>(null);
   // const [contractGov2, setContractGov2] = useState<ethers.Contract | null>(null);
   const [proposal, setProposal] = useState<{ loading: boolean; data: any[] }>({
     // Typecasted data to any[]
@@ -67,7 +70,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isLoadingNFT, setIsLoadingNFT] = useState<boolean>(false);
   const nftCurrency = "ETH";
 
-  console.log("wallet1", walletProvider);
+  // console.log("wallet1", walletProvider);
 
   // Connect to SmartContract
   const WRITETOSmartContract = async (contractType: any) => {
@@ -83,17 +86,25 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await multicalls(address);
-    };
-    fetchData();
-  }, [address]);
+useEffect(() => {
+  const fetchData = async () => {
+    await multicalls(address);
+  };
+  fetchData();
+}, [address]);
 
+useEffect(() => {
+  if (myTokenIds && myTokenIds.length > 0) {
+    fetchNFTs(myTokenIds);
+  }
+}, [myTokenIds]);
 
-  // ///////////////////////
-  ///////     DAO     ////////
-  /////////////////////////
+  
+  // //////////////////////////////////////
+  //////////                     //////////
+  //////////  DAO + Multicalls   ///////////
+  //////////                     ///////////
+  ///////////////////////////////////////////
 
   const multicalls = async (account:any) => {
     try {
@@ -168,7 +179,6 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 
       if (tokenCounts > 0) {
-        if (!isSupportedChain(chainId)) return toast.error("Ensure your wallet is connected, and on right chain");
         for (let i = _proposalCount; i < callResults.length; i++) {
         mkdaoResponse.push(itf2.decodeFunctionResult("ownerOf", callResults[i][1]))
         }
@@ -184,8 +194,8 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         return -1; 
       }).filter(index => index !== -1); 
 
-        // console.log("accounts:", accounts);
-        setTokens(myTokens);
+        console.log("accounts:", myTokens);
+        setMyTokenIds(myTokens);
             
     }
 
@@ -195,11 +205,15 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   };
 
-  const useVoteOnProposal = () => {
+  // address intiator,
+//         uint256 proposalId,
+//         MarkkinatLibrary.VoterDecision decision,
+//         uint256 _tokenId
+  const useVoteOnProposal = (proposalId:any,decision:any,tokenId:any) => {
     return useCallback(async () => {
       try {
         const contractGov = getDAOContract(readOnlyProvider);
-        const transaction = await contractGov.voteOnProposal();
+        const transaction = await contractGov.voteOnProposal(address,proposalId,decision,tokenId);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
 
@@ -212,7 +226,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       } catch (error) {
         console.log("error :", error);
       }
-    }, []);
+    }, [decision, proposalId, tokenId]);
   };
 
   const createProprosal = async (name: string, deadline: any, desc: string) => {
@@ -238,12 +252,36 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   };
 
+
+
+  // /////////////////////////////
+  //////////            //////////
+  //////////  NFTssss   ///////////
+  //////////           ///////////
+  ////////////////////////////////
+
   const createSale = () => {
     // Add your create sale logic here
   };
 
-  const fetchNFTs = () => {
-    // Add your fetch NFTs logic here
+  const fetchNFTs = async (tokenIDs:any[]) => {
+    const promises = tokenIDs.map((index) =>
+        fetch(`${process.env.NEXT_PUBLIC_token_base_url}/${index}`)
+    );
+    
+    const tokensMetadataResponse = await Promise.all(promises);
+
+    console.log("tokensMetadataResponse", tokensMetadataResponse);
+    
+    const tokensMetadataJson = [];
+
+    for (let i = 0; i < tokensMetadataResponse.length; i++) {
+        const json = await tokensMetadataResponse[i].json();
+        tokensMetadataJson.push(json);
+    }
+
+    setMetaNFTs(tokensMetadataJson);
+
   };
 
   const fetchMyNFTsOrCreatedNFTs = () => {
@@ -255,12 +293,15 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       value={{
         nftCurrency,
         createSale,
-        fetchNFTs,
         fetchMyNFTsOrCreatedNFTs,
         createProprosal,
         proposal,
         currentAccount,
         isLoadingNFT,
+        metaNFTs,
+        myTokenIds,
+        fetchNFTs,
+        useVoteOnProposal
       }}
     >
       {children}

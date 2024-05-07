@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 import { ThemeProvider } from "./context/ThemeProvider";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
