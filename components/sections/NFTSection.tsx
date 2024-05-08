@@ -17,7 +17,7 @@ const NFTSection = ({ name }: any) => {
     const [hideButtons, setHideButtons] = useState(false);
     const [metaNFTs, setMetaNFTs] = useState<any[] | null>(null);
     const items = useMkdaoItems();
-    console.log(items);
+    // console.log(items);
     
     const parentRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -54,12 +54,13 @@ const NFTSection = ({ name }: any) => {
         const address = `0x${makeIdAddress()}`;
         setSlicedSellerAddress(sliceAddress(address));
         isScrollable();
+        setMetaNFTs(items)
         window.addEventListener('resize', isScrollable);
 
         return () => {
             window.removeEventListener('resize', isScrollable);
         };
-    }, []);
+    }, [items]);
 
     return (
         <div className='pb-4'>
@@ -68,7 +69,7 @@ const NFTSection = ({ name }: any) => {
             </div>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                 <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none justify-start" ref={scrollRef}>
-                    {items.map((item,i) => (
+                    {metaNFTs?.map((item,i) => (
                         <NFTCard
                         key={`nft-${i}`}
                         nft={{

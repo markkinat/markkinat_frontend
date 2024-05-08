@@ -6,21 +6,26 @@ import SearchBar from "@/components/shared/SearchBar";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeProvider";
+import useMkdaoItems from "../hooks/useMkdaoItems";
 
 const Home = () => {
-  const [nfts, setNfts] = useState<number[] | any>([]);
-  const [nftsCopy, setNftsCopy] = useState<number[] | any>([]);
+  const [nfts, setNfts] = useState<number[] | any[]>([]);
+  const [nftsCopy, setNftsCopy] = useState<number[] | any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeSelect, setActiveSelect] = useState("Recently Added");
   const { theme } = useTheme();
+   const items = useMkdaoItems();
 
-  useEffect(() => {
-    [1, 2, 3, 4, 5, 7, 8, 9, 10].map((items) => {
-      setNfts(items);
-      setNftsCopy(items);
-      setIsLoading(false);
-    });
-  }, []);
+useEffect(() => {
+  if (Array.isArray(items) && items.length > 0) {
+    setNfts(items);
+    setNftsCopy(items);
+    setIsLoading(false);
+  } else {
+    // Handle the case where items is not an array or is empty
+    setIsLoading(false);
+  }
+}, [items]);
 
   console.log(nfts);
 
@@ -120,7 +125,7 @@ const Home = () => {
                 />
               </div>
               <div className="mt-3 w-full flex flex-wrap">
-                {nfts.map((nft: any) => (
+                {nfts.map((nft) => (
                   <NFTCard key={`nft-${nft.tokenId}`} nft={nft} onProfilePage />
                 ))}
               </div>
