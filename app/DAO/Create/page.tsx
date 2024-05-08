@@ -8,13 +8,18 @@ const CreateProposal = () => {
   const [deadline, setDeadline] = useState("");
   const [desc, setDesc] = useState("");
   const { theme } = useTheme();
-  const { createProprosal } = useNFTContext();
+  const { useCreateProprosal } = useNFTContext();
+
+  const submit = useCreateProprosal()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const unixTime = Date.parse(deadline) / 1000
-    console.log(title,unixTime, desc);
+    console.log(title, unixTime, desc);
+    
+    submit(title, desc, unixTime);
   };
+
 
   return (
     <div className="container mt-24 mb-12">

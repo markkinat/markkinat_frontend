@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTheme } from '@/app/context/ThemeProvider';
 
-
-const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }:any) => {
+const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }: any) => {
   const [search, setSearch] = useState('');
   const [toggle, setToggle] = useState(false);
   const [debouncedSearch, setDebouncedSearch] = useState(search);
@@ -12,7 +11,6 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }:
 
   useEffect(() => {
     const timer = setTimeout(() => setSearch(debouncedSearch), 1000);
-
     return () => clearTimeout(timer);
   }, [debouncedSearch]);
 
@@ -25,8 +23,8 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }:
   }, [clearSearch, handleSearch, search]);
 
   return (
-    <>
-      <div className="flex-1 flexCenter dark:bg-nft-black-2 bg-white border dark:border-nft-black-2 border-nft-gray-2 py-3 px-4 rounded-md">
+    <div className='w-full flex flex-col md:flex-row'>
+      <div className="flex-1 flex md:justify-start justify-center dark:bg-nft-black-2 bg-white border dark:border-nft-black-2 border-nft-gray-2 py-3 px-4 rounded-md mb-2 md:mb-0">
         <Image
           src={"/Search.png"}
           objectFit="contain"
@@ -38,7 +36,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }:
         <input
           type="text"
           placeholder="Search item here"
-          className="dark:bg-nft-black-2 bg-white mx-4 w-full font-poppins dark:text-white text-nft-black-1 font-normal text-xs outline-none"
+          className="dark:bg-nft-black-2 bg-white mx-4 w-full lg:w-300px font-poppins dark:text-white text-nft-black-1 font-normal text-xs outline-none"
           onChange={(e) => setDebouncedSearch(e.target.value)}
           value={debouncedSearch}
         />
@@ -46,7 +44,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }:
 
       <div
         onClick={() => setToggle(!toggle)}
-        className="relative flexBetween ml-4 sm:ml-0 sm:mt-2 min-w-190 cursor-pointer dark:bg-nft-black-2 bg-white border dark:border-nft-black-2 border-nft-gray-2 py-3 px-4 rounded-md"
+        className="flex-1 relative md:ml-4 sm:ml-0 sm:mt-2 md:mt-0 dark:bg-nft-black-2 bg-white border dark:border-nft-black-2 border-nft-gray-2 py-3 px-4 rounded-md"
       >
         <p className="font-poppins dark:text-white text-nft-black-1 font-normal text-xs">{activeSelect}</p>
         <Image
@@ -72,7 +70,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch }:
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

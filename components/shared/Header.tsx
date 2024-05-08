@@ -225,7 +225,7 @@ const Header = () => {
               className={`-pr-6 hidden md:block relative before:content-[''] before:block before:w-full before:h-full before:border before:absolute before:rounded-lg ${theme === "dark" ? "before:border-white" : "before:border-black"} before:top-1.5 before:left-1.5 cursor-pointer`} >
             <div className="flex justify-center items-center rounded-lg font-code px-4 py-2 text-base font-medium z-10 relative border border-black bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black hover:brightness-125"
             >
-              <span>{`${chainId} :`}</span>
+              <span>{`sepolia :`}</span>
               <span className="text-base ml-2">{account}</span>
               </div>
             </div>

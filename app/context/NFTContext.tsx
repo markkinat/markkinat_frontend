@@ -31,7 +31,7 @@ type NFTContextType = {
   useVoteOnProposal: any;
   createSale: any;
   fetchMyNFTsOrCreatedNFTs: any;
-  createProprosal: any;
+  useCreateProprosal: any;
   proposal: any;
   currentAccount: string | null;
   isLoadingNFT: boolean;
@@ -211,7 +211,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const useVoteOnProposal = (proposalId:any,decision:any,tokenId:any) => {
     return useCallback(async () => {
       try {
-        const contractGov = getDAOContract(readOnlyProvider);
+        const contractGov = await WRITETOSmartContract(getDAOContract);
         const transaction = await contractGov.voteOnProposal(address,proposalId,decision,tokenId);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
@@ -228,7 +228,8 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }, [decision, proposalId, tokenId]);
   };
 
-  const createProprosal = async (name: string, deadline: any, desc: string) => {
+  const useCreateProprosal = (name: string, deadline: any, desc: string) => {
+    return useCallback(async () => {
     try {
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
       const contractGov = await WRITETOSmartContract(getDAOContract);
@@ -249,6 +250,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     } catch (error) {
       console.log("error writing to contract :", error);
     }
+    }, [deadline, desc, name]);  
   };
 
 
@@ -291,7 +293,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         nftCurrency,
         createSale,
         fetchMyNFTsOrCreatedNFTs,
-        createProprosal,
+        useCreateProprosal,
         proposal,
         currentAccount,
         isLoadingNFT,

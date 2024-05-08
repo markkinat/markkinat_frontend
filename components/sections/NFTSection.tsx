@@ -77,8 +77,9 @@ const NFTSection = ({ name }: any) => {
                             name: `${item.name}`,
                             description: `${item.features[0].trait_type}`,
                             image: `${item.image}`,
-                            edition: `${item.edition}`
-                    }}
+                            edition: `${item.edition}`,
+                            address: `${process.env.NEXT_PUBLIC_MarkkinatNFT_address}`    
+                        }}
                         />
                     ))}
                     {!hideButtons && (

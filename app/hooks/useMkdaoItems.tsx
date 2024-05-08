@@ -7,8 +7,8 @@ const useMkdaoItems = () => {
 
     useEffect(() => {
         (async () => {
-            const tokenIDs = [...Array.from({ length: 100 })].map(
-                (_, index) => index+1
+            const tokenIDs = [...Array.from({ length: 80 })].map(
+                (_, index) => index+21
             );
 
             const promises = tokenIDs.map((index) =>

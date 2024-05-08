@@ -6,10 +6,7 @@ import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-// address intiator,
-//         uint256 proposalId,
-//         MarkkinatLibrary.VoterDecision decision,
-//         uint256 _tokenId
+
 const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const { theme } = useTheme();
   const { proposal,useVoteOnProposal } = useNFTContext();

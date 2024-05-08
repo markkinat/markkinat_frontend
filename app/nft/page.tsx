@@ -1,6 +1,6 @@
-import CheckoutModal from "@/components/modal/checkoutModal";
+import CheckoutModal from "@/components/modal/checkoutmodal";
 
-const Collection = () => {
+const NFT = () => {
   return (
     <div className="mt-24 container">
       <div className="lg:flex justify-center">
@@ -79,4 +79,4 @@ const Collection = () => {
   );
 };
 
-export default Collection;
+export default NFT;

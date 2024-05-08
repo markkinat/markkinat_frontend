@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { useTypewriter } from 'react-simple-typewriter';
 import Banner from '../shared/Banner';
+import { useTheme } from '@/app/context/ThemeProvider';
 
 
 const wrapLettersWithSpan = (text:any, isTypedText:any) => {
@@ -11,6 +12,7 @@ const wrapLettersWithSpan = (text:any, isTypedText:any) => {
 };
 
 const Hero = () => {
+    const { theme } = useTheme();
 
     const [text] = useTypewriter({
         words: ['Discover', 'Collect', 'Sell', 'and Bid'],
@@ -25,14 +27,14 @@ const Hero = () => {
   return (
     <div>
         <Banner
-            name={(<>
-            <span className="lg:text-7xl md:text-6xl text-2xl sm:text-3xl">
-                {wrappedText}
-            </span>
-            <br /> extraordinary NFTs
-        </>)}
-        childStyles="text-left"
-        parentStyle="justify-center sm:h-72 xs:h-60 xs:p-12 p-4 h-44 rounded-3xl"
+              name={(<>
+                  <span className="lg:text-7xl md:text-6xl text-2xl sm:text-3xl">
+                      {wrappedText}
+                  </span>
+                  <br /> extraordinary NFTs
+              </>)}
+              childStyles="text-left"
+              parentStyle={`justify-center sm:h-72 xs:h-60 xs:p-12 p-4 h-44 rounded-3xl ${theme ==='dark'? "":"nft-gradient relative mb-8"}`}
         />
     </div>
   )
