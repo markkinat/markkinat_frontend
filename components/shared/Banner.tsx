@@ -1,19 +1,19 @@
-"use client"
-import { useEffect } from "react";
-import gsap from "gsap";
+// "use client"
+// import { useEffect } from "react";
+// import gsap from "gsap";
 import { useTheme } from "@/app/context/ThemeProvider";
 
 const Banner = ({ name, childStyles, parentStyle }:any) => {
     
   const { theme } = useTheme();
-    useEffect(() => {
-        const tlMovement = gsap.timeline({ repeat: -1, yoyo: true }); // Timeline for continuous back and forth movement
-        tlMovement.fromTo(
-            ".white-bg",
-            { x: 0, y: 0, ease: "power1.inOut" }, // Start position
-            { x: "random(-100, 100)", y: "random(-100, 100)", ease: "power1.inOut", duration: 3 } // End position with random x and y values
-        );
-    }, []);
+    // useEffect(() => {
+    //     const tlMovement = gsap.timeline({ repeat: -1, yoyo: true }); // Timeline for continuous back and forth movement
+    //     tlMovement.fromTo(
+    //         ".white-bg",
+    //         { x: 0, y: 0, ease: "power1.inOut" }, // Start position
+    //         { x: "random(-100, 100)", y: "random(-100, 100)", ease: "power1.inOut", duration: 3 } // End position with random x and y values
+    //     );
+    // }, []);
 
     return (
         <div className={`w-full flex items-center z-0 overflow-hidden ${theme ==='dark'? "":"nft-gradient relative mb-8"}  ${parentStyle}`}>

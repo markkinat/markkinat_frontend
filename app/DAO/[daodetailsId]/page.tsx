@@ -25,7 +25,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   // console.log("PARAMSSSSS ", params.daodetailsId);
   // console.log(vote);
   
-  const handleVotes = useVoteOnProposal(params.daodetailsId,vote,tokenId);
+  const handleVotes = useVoteOnProposal(Number(params.daodetailsId),vote,Number(tokenId));
   
   useEffect(() => {
     setLoading(proposal.loading);

@@ -4,6 +4,8 @@ import NFTCard from '../shared/NFTCard';
 import makeIdAddress from '@/utils/makeIdAddress';
 import Image from 'next/image';
 import { useTheme } from '@/app/context/ThemeProvider';
+// import { useNFTContext } from '@/app/context/NFTContext';
+import useMkdaoItems from '@/app/hooks/useMkdaoItems';
 
 const sliceAddress = (address: any) => {
     if (!address || address.length < 3) return address;
@@ -12,8 +14,11 @@ const sliceAddress = (address: any) => {
 
 const NFTSection = ({ name }: any) => {
     const [slicedSellerAddress, setSlicedSellerAddress] = useState('');
-        const [hideButtons, setHideButtons] = useState(false);
-
+    const [hideButtons, setHideButtons] = useState(false);
+    const [metaNFTs, setMetaNFTs] = useState<any[] | null>(null);
+    const items = useMkdaoItems();
+    console.log(items);
+    
     const parentRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
@@ -63,17 +68,16 @@ const NFTSection = ({ name }: any) => {
             </div>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                 <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none justify-start" ref={scrollRef}>
-                    {[1, 2, 3, 4, 5,7,8,9,10].map((i) => (
+                    {items.map((item,i) => (
                         <NFTCard
-                            key={`nft-${i}`}
-                            nft={{
-                                i,
-                                name: `Nifty NFT ${i}`,
-                                price: (10 - i * 0.534).toFixed(2),
-                                seller: slicedSellerAddress,
-                                owner: slicedSellerAddress,
-                                description: 'Cool NFT on Sale',
-                            }}
+                        key={`nft-${i}`}
+                        nft={{
+                            i,
+                            name: `${item.name}`,
+                            description: `${item.features[0].trait_type}`,
+                            image: `${item.image}`,
+                            edition: `${item.edition}`
+                    }}
                         />
                     ))}
                     {!hideButtons && (

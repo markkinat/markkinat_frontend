@@ -25,7 +25,7 @@ const NFTToken = ({Vote, handleVote,setTokenId}:any) => {
           <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
             {metaNFTs?.length === 0 ? (
               <Text>No NFT owned yet</Text>
-            ) : (
+          ) : (
               metaNFTs?.map((item, i) => (
                 <div key={`nft-${i}`} className='cc'>  
                   <NFTTokenId

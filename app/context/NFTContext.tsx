@@ -37,7 +37,7 @@ type NFTContextType = {
   isLoadingNFT: boolean;
   metaNFTs: any[] | null;
   myTokenIds: number[] | null;
-  fetchNFTs: any
+  fetchNFTs: any;
 };
 
 // Create the context
@@ -52,7 +52,7 @@ export const useNFTContext = () => {
   return context;
 };
 
-// Provider component
+
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { chainId, address } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
@@ -61,7 +61,6 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [metaNFTs, setMetaNFTs] = useState<any[] | null>(null);
   // const [contractGov2, setContractGov2] = useState<ethers.Contract | null>(null);
   const [proposal, setProposal] = useState<{ loading: boolean; data: any[] }>({
-    // Typecasted data to any[]
     loading: true,
     data: [],
   });
@@ -70,7 +69,6 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isLoadingNFT, setIsLoadingNFT] = useState<boolean>(false);
   const nftCurrency = "ETH";
 
-  // console.log("wallet1", walletProvider);
 
   // Connect to SmartContract
   const WRITETOSmartContract = async (contractType: any) => {
@@ -86,19 +84,23 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   };
 
-useEffect(() => {
-  const fetchData = async () => {
-    await multicalls(address);
-  };
-  fetchData();
-}, [address]);
+ useEffect(() => {
+    const fetchData = async () => {
+      if (address) {
+        await multicalls(address);
+      }
+    };
+    fetchData();
+  }, [address]);
 
-useEffect(() => {
-  if (myTokenIds && myTokenIds.length > 0) {
-    fetchNFTs(myTokenIds);
-  }
-}, [myTokenIds]);
+  // useEffect to fetch NFTs when myTokenIds change
+  useEffect(() => {
+    if (myTokenIds && myTokenIds.length > 0) {
+      fetchNFTs(myTokenIds);
+    }
+  }, [myTokenIds]);
 
+  
   
   // //////////////////////////////////////
   //////////                     //////////
@@ -205,10 +207,7 @@ useEffect(() => {
     }
   };
 
-  // address intiator,
-//         uint256 proposalId,
-//         MarkkinatLibrary.VoterDecision decision,
-//         uint256 _tokenId
+
   const useVoteOnProposal = (proposalId:any,decision:any,tokenId:any) => {
     return useCallback(async () => {
       try {
@@ -264,25 +263,23 @@ useEffect(() => {
     // Add your create sale logic here
   };
 
-  const fetchNFTs = async (tokenIDs:any[]) => {
+  const fetchNFTs = async (tokenIDs:number[]) => {
     const promises = tokenIDs.map((index) =>
         fetch(`${process.env.NEXT_PUBLIC_token_base_url}/${index}`)
     );
     
-    const tokensMetadataResponse = await Promise.all(promises);
-
-    console.log("tokensMetadataResponse", tokensMetadataResponse);
-    
+    const tokensMetadataResponse = await Promise.all(promises);    
     const tokensMetadataJson = [];
 
     for (let i = 0; i < tokensMetadataResponse.length; i++) {
         const json = await tokensMetadataResponse[i].json();
         tokensMetadataJson.push(json);
     }
-
     setMetaNFTs(tokensMetadataJson);
+    return tokensMetadataJson;
 
   };
+
 
   const fetchMyNFTsOrCreatedNFTs = () => {
     // Add your fetch my NFTs or created NFTs logic here
@@ -301,7 +298,7 @@ useEffect(() => {
         metaNFTs,
         myTokenIds,
         fetchNFTs,
-        useVoteOnProposal
+        useVoteOnProposal,
       }}
     >
       {children}
