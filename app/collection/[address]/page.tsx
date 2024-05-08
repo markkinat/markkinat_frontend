@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "../../context/ThemeProvider";
 import useMkdaoItems from "../../hooks/useMkdaoItems";
-import MKDAO from "@/components/shared/MKDAO";
+import NFTCard from "@/components/shared/NFTCard";
 
 const Home = ({params}: {params: { address: string }})=> {
   const [nfts, setNfts] = useState<number[] | any[]>([]);
@@ -125,7 +125,7 @@ useEffect(() => {
               </div>
               <div className="mt-3 w-full flex flex-wrap">
                 {nfts.map((nft) => (
-                  <MKDAO key={nft.edition} nft={nft} onProfilePage />
+                  <NFTCard key={nft.edition} nft={nft} onProfilePage />
                 ))}
               </div>
             </div>
