@@ -69,15 +69,15 @@ const HotBids = ({ name }: any) => {
             </div>
             <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                 <div className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none justify-start" ref={scrollRef}>
-                    {metaNFTs?.map((item,i) => (
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]?.map((i) => (
                         <NFTCard
                         key={`nft-${i}`}
                         nft={{
                             i,
-                            name: `${item.name}`,
-                            description: `${item.features[0].trait_type}`,
-                            image: `${item.image}`,
-                            edition: `${item.edition}`,
+                            name: `Nifty NFT ${i}`,
+                            description: 'Cool NFT on Sale',
+                            price: (10 - i * 0.534).toFixed(2),
+                            edition: `${i}`,
                             address: `${slicedSellerAddress}`    
                         }}
                         />

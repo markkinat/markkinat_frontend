@@ -1,11 +1,11 @@
 import CheckoutModal from "@/components/modal/checkoutmodal";
 
-const NFT = () => {
+const NFT = ({params}: {params: { id: number }}) => {
   return (
     <div className="mt-24 container">
       <div className="lg:flex justify-center">
         <div className="w-[100%] p-12">
-          <img src="nft1.png" alt="NFT" className=" rounded-2xl md:w-[80%]" />
+          <img src="/nft1.png" alt="NFT" className=" rounded-2xl md:w-[80%]" />
         </div>
         <div className=" md:w-[45%] p-12">
           <div className="">
@@ -21,7 +21,7 @@ const NFT = () => {
             <div>
               <div className="flex">
                 <img
-                  src="creator.png"
+                  src="/creator.png"
                   alt="creator"
                   className="rounded-full w-6"
                 />

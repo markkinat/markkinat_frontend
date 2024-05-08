@@ -4,6 +4,7 @@ import { BackgroundCircles } from '@/components/designs/Home';
 import Details from '@/components/sections/Details';
 import { TopCollection } from '@/components/shared/TopCollection';
 import Hero from '@/components/sections/Hero';
+import HotBids from '@/components/sections/HotBids';
 
 
 
@@ -20,7 +21,7 @@ export default function Home() {
                 <Hero />
                 <NFTSection name={"MKNDAO Collections"} />
                 <TopCollection />
-                <NFTSection name={"Hot Bids"} />
+                <HotBids name={"Hot Bids"} />
                 <TopSeller />
                 <Details />
             </div>
