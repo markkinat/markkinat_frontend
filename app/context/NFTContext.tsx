@@ -13,6 +13,7 @@ import {
 import { ethers } from "ethers";
 import {
   getDAOContract,
+  getMarketPlaceContract,
   getMKDAOContract,
   getMulticallContract,
 } from "@/utils/constants/contracts";
@@ -52,7 +53,6 @@ export const useNFTContext = () => {
   return context;
 };
 
-
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { chainId, address } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
@@ -69,7 +69,6 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isLoadingNFT, setIsLoadingNFT] = useState<boolean>(false);
   const nftCurrency = "ETH";
 
-
   // Connect to SmartContract
   const WRITETOSmartContract = async (contractType: any) => {
     try {
@@ -84,7 +83,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   };
 
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       if (address) {
         await multicalls(address);
@@ -100,15 +99,13 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   }, [myTokenIds]);
 
-  
-  
   // //////////////////////////////////////
   //////////                     //////////
   //////////  DAO + Multicalls   ///////////
   //////////                     ///////////
   ///////////////////////////////////////////
 
-  const multicalls = async (account:any) => {
+  const multicalls = async (account: any) => {
     try {
       const itf = new ethers.Interface(Abi1);
       const itf2 = new ethers.Interface(markinattAbi);
@@ -120,11 +117,11 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       // console.log("CONTRACT ", contractGov);
 
       const data = await contractGov.proposalCount();
-      const data2 = await contractMKDAO.tokenIds()
+      const data2 = await contractMKDAO.tokenIds();
 
       const _proposalCount = Number(data);
-      const tokenCounts = Number(data2)
-      // console.log("PROPOSAL COUNT ", _proposalCount);      
+      const tokenCounts = Number(data2);
+      // console.log("PROPOSAL COUNT ", _proposalCount);
       // console.log("tokenCounts COUNT ", tokenCounts);
 
       let calls = [];
@@ -135,15 +132,14 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         });
       }
       if (tokenCounts > 0) {
-         for (let i = 1; i < tokenCounts; i++) {
-        calls.push({
-          target: process.env.NEXT_PUBLIC_MarkkinatNFT_address,
-          callData: itf2.encodeFunctionData("ownerOf", [i]),
-        });
-         }
-        
+        for (let i = 1; i < tokenCounts; i++) {
+          calls.push({
+            target: process.env.NEXT_PUBLIC_MarkkinatNFT_address,
+            callData: itf2.encodeFunctionData("ownerOf", [i]),
+          });
+        }
       }
-     
+
       const callResults = await multicallContract.tryAggregate.staticCall(
         false,
         calls
@@ -152,14 +148,14 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       //   itf.decodeFunctionResult("proposals", res[1])
       // );
 
-      let proposalResponse = []
+      let proposalResponse = [];
       let mkdaoResponse = [];
       for (let i = 0; i < _proposalCount; i++) {
-        proposalResponse.push(itf.decodeFunctionResult("proposals", callResults[i][1]))
-
+        proposalResponse.push(
+          itf.decodeFunctionResult("proposals", callResults[i][1])
+        );
       }
       // console.log("RESPONSE ", proposalResponse);
-
 
       let prop = [];
       for (let i = 0; i < proposalResponse.length; i++) {
@@ -179,40 +175,43 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       }
       setProposal({ loading: false, data: prop });
 
-
       if (tokenCounts > 0) {
         for (let i = _proposalCount; i < callResults.length; i++) {
-        mkdaoResponse.push(itf2.decodeFunctionResult("ownerOf", callResults[i][1]))
+          mkdaoResponse.push(
+            itf2.decodeFunctionResult("ownerOf", callResults[i][1])
+          );
         }
         // console.log("mkdaoResponse ", mkdaoResponse);
-          
 
-        const accounts = mkdaoResponse.map((res: any) =>res[0])    
+        const accounts = mkdaoResponse.map((res: any) => res[0]);
         // console.log("ADDRESS ",account);
-        const myTokens = accounts.map((x, index) => {
-        if (address && x === address) {
-          return index+1;
-        }
-        return -1; 
-      }).filter(index => index !== -1); 
+        const myTokens = accounts
+          .map((x, index) => {
+            if (address && x === address) {
+              return index + 1;
+            }
+            return -1;
+          })
+          .filter((index) => index !== -1);
 
         console.log("accounts:", myTokens);
         setMyTokenIds(myTokens);
-            
-    }
-
-
+      }
     } catch (error) {
       console.error("Error in multicall:", error);
     }
   };
 
-
-  const useVoteOnProposal = (proposalId:any,decision:any,tokenId:any) => {
+  const useVoteOnProposal = (proposalId: any, decision: any, tokenId: any) => {
     return useCallback(async () => {
       try {
         const contractGov = await WRITETOSmartContract(getDAOContract);
-        const transaction = await contractGov.voteOnProposal(address,proposalId,decision,tokenId);
+        const transaction = await contractGov.voteOnProposal(
+          address,
+          proposalId,
+          decision,
+          tokenId
+        );
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
 
@@ -230,30 +229,28 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const useCreateProprosal = (name: string, deadline: any, desc: string) => {
     return useCallback(async () => {
-    try {
-      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-      const contractGov = await WRITETOSmartContract(getDAOContract);
-      const transaction = await contractGov.createProposal(
-        name,
-        deadline,
-        desc
-      );
-      console.log("transaction: ", transaction);
-      const receipt = await transaction.wait();
+      try {
+        if (!isSupportedChain(chainId)) return toast.error("Wrong network");
+        const contractGov = await WRITETOSmartContract(getDAOContract);
+        const transaction = await contractGov.createProposal(
+          name,
+          deadline,
+          desc
+        );
+        console.log("transaction: ", transaction);
+        const receipt = await transaction.wait();
 
-      console.log("receipt: ", receipt);
+        console.log("receipt: ", receipt);
 
-      if (receipt.status) {
-        return toast.success("Voted Successfully!");
+        if (receipt.status) {
+          return toast.success("Voted Successfully!");
+        }
+        toast.error("Vote Process Failed!");
+      } catch (error) {
+        console.log("error writing to contract :", error);
       }
-      toast.error("Vote Process Failed!");
-    } catch (error) {
-      console.log("error writing to contract :", error);
-    }
-    }, [deadline, desc, name]);  
+    }, [deadline, desc, name]);
   };
-
-
 
   // /////////////////////////////
   //////////            //////////
@@ -265,23 +262,21 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     // Add your create sale logic here
   };
 
-  const fetchNFTs = async (tokenIDs:number[]) => {
+  const fetchNFTs = async (tokenIDs: number[]) => {
     const promises = tokenIDs.map((index) =>
-        fetch(`${process.env.NEXT_PUBLIC_token_base_url}/${index}`)
+      fetch(`${process.env.NEXT_PUBLIC_token_base_url}/${index}`)
     );
-    
-    const tokensMetadataResponse = await Promise.all(promises);    
+
+    const tokensMetadataResponse = await Promise.all(promises);
     const tokensMetadataJson = [];
 
     for (let i = 0; i < tokensMetadataResponse.length; i++) {
-        const json = await tokensMetadataResponse[i].json();
-        tokensMetadataJson.push(json);
+      const json = await tokensMetadataResponse[i].json();
+      tokensMetadataJson.push(json);
     }
     setMetaNFTs(tokensMetadataJson);
     return tokensMetadataJson;
-
   };
-
 
   const fetchMyNFTsOrCreatedNFTs = () => {
     // Add your fetch my NFTs or created NFTs logic here

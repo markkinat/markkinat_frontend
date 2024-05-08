@@ -1,4 +1,5 @@
 "use client";
+import { Dialog, Flex, Button } from "@radix-ui/themes";
 import Image from "next/image";
 export interface CheckoutProp {
   action: string;
@@ -6,19 +7,15 @@ export interface CheckoutProp {
 
 const CheckoutModal = (prop: CheckoutProp) => {
   return (
-    <>
-      <button
-        className="btn btn-secondary w-[45%]"
-        onClick={() => {
-          console.log("ahaaaaaa");
-          (document.getElementById("checkOut") as HTMLFormElement).showModal();
-        }}
+    <Dialog.Root>
+      <Dialog.Trigger>{prop.action}</Dialog.Trigger>
+
+      <Dialog.Content
+        style={{ maxWidth: "80vw", margin: "auto", height: "100%" }}
       >
-        {prop.action}
-      </button>
-      <dialog id="checkOut" className="modal">
-        <div className="modal-box w-11/12 max-w-5xl">
-          <h2>Check Out</h2>
+        <Dialog.Title>Checkout</Dialog.Title>
+
+        <Flex direction="column" gap="3">
           <div className="">
             <div className="flex justify-between">
               <p className="font-bold">item</p>
@@ -39,15 +36,22 @@ const CheckoutModal = (prop: CheckoutProp) => {
               <p className="font-bold">4.5ETH</p>
             </div>
           </div>
-          <div className="flex justify-between mt-4">
-            <button className="btn btn-secondary w-59">Buy for 4.5ETH</button>
-            <button className="btn btn-neutral hover:text-white hover:bg-transparent text-sm w-59">
-              Make Offer
-            </button>
-          </div>
-        </div>
-      </dialog>
-    </>
+        </Flex>
+
+        <Flex gap="3" mt="4" justify="end">
+          <Dialog.Close>
+            <Button variant="soft" color="gray">
+              Cancel
+            </Button>
+          </Dialog.Close>
+          <Dialog.Close>
+            <Button variant="soft" color="blue">
+              Vote
+            </Button>
+          </Dialog.Close>
+        </Flex>
+      </Dialog.Content>
+    </Dialog.Root>
   );
 };
 export default CheckoutModal;

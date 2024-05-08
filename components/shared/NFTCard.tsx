@@ -34,4 +34,4 @@ const NFTCard = ({ nft }: any) => {
   )
 }
 
-export default NFTCard
+export default NFTCard;
