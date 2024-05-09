@@ -158,17 +158,31 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       let prop = [];
       for (let i = 0; i < proposalResponse.length; i++) {
         const obj = proposalResponse[i][0];
+        console.log("OBJJJ ", obj);
+        
+        // uint256 proposalId;
+        // string name;
+        // string description;
+        // address creator;
+        // uint256 forProposal;
+        // uint256 againstProposal;
+        // uint256 abstainProposal;
+        // mapping(uint256 => bool) voter;
+        // uint256 deadLine;
+        // uint256 totalVoters;
+        // bool isExecuted;
+        // Executed executed;
         prop.push({
-          proposalId: Number(obj.proposalId),
-          forProposal: Number(obj.forProposal),
-          againstProposal: Number(obj.againstProposal),
-          totalabstain: Number(obj.abstainProposal),
-          deadLine: Number(obj.deadLine),
-          votes: Number(obj.votes),
-          executed: obj.executed,
-          name: obj.name,
-          description: obj.description,
-          creator: obj.creator,
+          proposalId: Number(proposalResponse[i][0]),
+          forProposal: Number(proposalResponse[i][4]),
+          againstProposal: Number(proposalResponse[i][5]),
+          totalabstain: Number(proposalResponse[i][6]),
+          deadLine: Number(proposalResponse[i][8]),
+          votes: Number(proposalResponse[i][9]),
+          executed: proposalResponse[i][10],
+          name: proposalResponse[i][1],
+          description: proposalResponse[i][2],
+          creator: proposalResponse[i][3],
         });
       }
       setProposal({ loading: false, data: prop });
