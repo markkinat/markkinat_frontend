@@ -119,11 +119,11 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       const _proposalCount = Number(data);
       const tokenCounts = Number(data2);
-      // console.log("PROPOSAL COUNT ", _proposalCount);
+      console.log("PROPOSAL COUNT ", _proposalCount);
       // console.log("tokenCounts COUNT ", tokenCounts);
 
       let calls = [];
-      for (let i = 0; i < _proposalCount; i++) {
+      for (let i = 1; i < 2; i++) {
         calls.push({
           target: process.env.NEXT_PUBLIC_DAO_address,
           callData: itf.encodeFunctionData("proposals", [i]),
@@ -153,7 +153,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           itf.decodeFunctionResult("proposals", callResults[i][1])
         );
       }
-      // console.log("RESPONSE ", proposalResponse);
+      console.log("RESPONSE ", proposalResponse);
 
       let prop = [];
       for (let i = 0; i < proposalResponse.length; i++) {
@@ -162,7 +162,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           proposalId: Number(obj.proposalId),
           forProposal: Number(obj.forProposal),
           againstProposal: Number(obj.againstProposal),
-          totalabstainProposalStaked: Number(obj.abstainProposal),
+          totalabstain: Number(obj.abstainProposal),
           deadLine: Number(obj.deadLine),
           votes: Number(obj.votes),
           executed: obj.executed,

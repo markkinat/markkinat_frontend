@@ -6,12 +6,27 @@ import Link from "next/link";
 import Loader from "@/components/shared/Loader";
 import { Text } from "@radix-ui/themes";
 
+
+
+interface Proposal {
+  name: string;
+  forProposal: number;
+  againstProposal: number;
+  totalabstain: number;
+  deadLine: number;
+  votes: number;
+  executed: boolean;
+  description: string;
+  creator: string;
+  proposalId:number
+}
+
 const DAO = () => {
   const { theme } = useTheme();
   const { proposal } = useNFTContext();
 
   const [loading, setLoading] = useState(true);
-  const [proposals, setProposals] = useState([]); // State variable for proposals
+   const [proposals, setProposals] = useState<Proposal[]>([]); // State variable for proposals
 
   useEffect(() => {
     setLoading(proposal.loading);
@@ -143,7 +158,7 @@ const DAO = () => {
               <Loader />
             </div>
           ) : (
-            proposals.length === 1 ? (
+            proposals.length === 0 ? (
               <Text className="text-5xl flexCenter">No Proposal Yet</Text>
             ) : (proposals?.map((prop, index)=>(
               <Link
@@ -156,7 +171,7 @@ const DAO = () => {
                     <div className="w-7 h-7 rounded-full bg-neutral-500"></div>
                     <div className="flex flex-col gap-2">
                       <div className="flex gap-2 p-2 items-center">
-                        <p>Web3BridgeDAO</p>
+                        <p>{prop?.creator}</p>
                         <p className="border-[0.5px] border-neutral-700 rounded-xl px-2">
                           core
                         </p>
@@ -169,13 +184,10 @@ const DAO = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold">
-                    #32 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    ad minim veniam, quis nostrud exercitation ullamco nisi ut
-                    aliquip ex ea commodo consequat.
+                   #{prop.proposalId}{""}{prop.name}
                   </h3>
                   <p className="mt-2 leading-7">
-                    {prop}
+                    {prop.description}
                   </p>
                   <p className="text-sm mt-3 text-[#D9D9D9] font-light">
                     Ends in 6 days
