@@ -7,13 +7,25 @@ import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
+interface Data {
+  name: string;
+  forProposal: number;
+  againstProposal: number;
+  totalabstain: number;
+  deadLine: number;
+  votes: number;
+  executed: boolean;
+  description: string;
+  creator: string;
+  proposalId:number
+}
 
 const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const { theme } = useTheme();
   const { proposal } = useNFTContext();
 
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Data>();
   const [vote, setVote] = useState(2);
   const [tokenId, setTokenId] = useState()
 
@@ -27,7 +39,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   
   useEffect(() => {
     setLoading(proposal.loading);
-    setData(proposal.data[params.daodetailsId])
+    setData(proposal.data[params.daodetailsId+1])
   }, [params.daodetailsId, proposal]);
 
   // console.log("Proposalsssss ", proposal.data);
@@ -59,17 +71,14 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                   theme === "dark" ? "" : "text-black"
                 } text-2xl font-bold`}
               >
-                #32 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                ad minim veniam, quis nostrud exercitation ullamco nisi ut
-                aliquip ex ea commodo consequat.
+                 #{data?.proposalId}{" "}{data?.name}
               </h3>
 
               <div className="flex items-center justify-between">
                 <div className="flex gap-3 py-4 items-center">
                   <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
                   <p className={theme === "dark" ? "" : "text-black"}>
-                    Web3BridgeDAODetails
+                    MarkinnatDAO
                   </p>
                   <p
                     className={`${
@@ -108,20 +117,9 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
               <div
                 className={`${theme === "dark" ? "" : "text-black"} leading-7`}
               >
-                <h3 className="">Proposal Category: Treasury Stewardship</h3>
-                <h3 className="">Adekunle Stephen - Team Lead</h3>
-                <h3 className="">Apollo - Co-lead</h3>
-                <h3 className="">Okekunle - Senior Dev</h3>
+                <h3 className="">{data?.creator}</h3>
                 <p className="mt-2">
-                  Proposal Description: <br /> Sed ut perspiciatis unde omnis
-                  iste natus error sit voluptatem accusantium doloremque
-                  laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                  inventore veritatis et quasi architecto beatae vitae dicta
-                  sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-                  aspernatur aut odit aut fugit, sed quia consequuntur magni
-                  dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
-                  quisquam est, qui dolorem ipsum quia dolor sit amet,
-                  consectetur, adipisci velit,
+                  Proposal Description: <br />  {data?.description}
                 </p>
               </div>
             </div>

@@ -163,7 +163,7 @@ const DAO = () => {
             ) : (proposals?.map((prop, index)=>(
               <Link
                 key={index}
-                href={`/DAO/${1}`}
+                href={`/DAO/${index}`}
                 className="flex flex-col gap-8 my-5 bg-[#0e0c15]/90 rounded-2xl p-5 text-neutral-100 cursor-pointer"
               >
                 <div className="flex gap-2 items-center justify-between">
@@ -184,7 +184,7 @@ const DAO = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold">
-                   #{prop.proposalId}{""}{prop.name}
+                   #{prop.proposalId}{" "}{prop.name}
                   </h3>
                   <p className="mt-2 leading-7">
                     {prop.description}
