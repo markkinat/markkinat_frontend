@@ -1,6 +1,7 @@
 "use client";
 import { useNFTContext } from "@/app/context/NFTContext";
 import { useTheme } from "@/app/context/ThemeProvider";
+import useVoteOnProposal from "@/app/hooks/useVoteOnProposal";
 import NFTToken from "@/components/modal/NFTToken";
 import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ import { useEffect, useState } from "react";
 
 const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const { theme } = useTheme();
-  const { proposal,useVoteOnProposal } = useNFTContext();
+  const { proposal } = useNFTContext();
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);

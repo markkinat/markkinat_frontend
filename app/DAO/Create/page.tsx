@@ -1,14 +1,13 @@
 "use client";
-import { FormEvent, useState } from "react"; // Import FormEvent and useState
-import { useNFTContext } from "@/app/context/NFTContext";
+import { FormEvent, useState } from "react"; 
 import { useTheme } from "@/app/context/ThemeProvider";
+import useCreateProprosal from "@/app/hooks/useCreateProprosal";
 
 const CreateProposal = () => {
   const [title, setTitle] = useState("");
   const [deadline, setDeadline] = useState("");
   const [desc, setDesc] = useState("");
   const { theme } = useTheme();
-  const { useCreateProprosal } = useNFTContext();
 
   const submit = useCreateProprosal()
 
@@ -17,7 +16,7 @@ const CreateProposal = () => {
     const unixTime = Date.parse(deadline) / 1000
     console.log(title, unixTime, desc);
     
-    submit(title, desc, unixTime);
+    submit(title, Number(unixTime),desc);
   };
 
 

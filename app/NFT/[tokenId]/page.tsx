@@ -1,9 +1,11 @@
 "use client"
+import { useNFTContext } from "@/app/context/NFTContext";
 import { useTheme } from "@/app/context/ThemeProvider";
+import useMints from "@/app/hooks/useMints";
 
 const Home = ({ params }: { params: { tokenId: string } }) => {
   const { theme } = useTheme();
-  
+  const mint = useMints();
   return (
     <>
     <div className="mt-24 container">
@@ -32,8 +34,7 @@ const Home = ({ params }: { params: { tokenId: string } }) => {
                 <h3 className="font-bold px-2">Markkinat&apos;s collection</h3>
               </div>
               <div className="mt-6">
-                <button onClick={()=>{console.log("clicked");
-                  }} className="btn btn-neutral hover:text-white text-sm w-[45%]">
+                <button onClick={mint} className="btn btn-neutral hover:text-white text-sm w-[45%]">
                     Mint
                   </button>
             </div>  

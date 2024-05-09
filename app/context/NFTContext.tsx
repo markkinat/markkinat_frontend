@@ -29,10 +29,6 @@ import { toast } from "react-toastify";
 
 type NFTContextType = {
   nftCurrency: string;
-  useVoteOnProposal: any;
-  createSale: any;
-  fetchMyNFTsOrCreatedNFTs: any;
-  useCreateProprosal: any;
   proposal: any;
   currentAccount: string | null;
   isLoadingNFT: boolean;
@@ -54,7 +50,7 @@ export const useNFTContext = () => {
 };
 
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { chainId, address } = useWeb3ModalAccount();
+  const {  address } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
   const [myTokenIds, setMyTokenIds] = useState<number[]>([]);
 
@@ -75,6 +71,8 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       const readWriteProvider = getProvider(walletProvider);
       const signer = readWriteProvider.getSigner();
       const contract = contractType(signer);
+      console.log(contract);
+      
       return contract;
     } catch (error) {
       console.log(
@@ -194,7 +192,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           })
           .filter((index) => index !== -1);
 
-        console.log("accounts:", myTokens);
+        // console.log("accounts:", myTokens);
         setMyTokenIds(myTokens);
       }
     } catch (error) {
@@ -202,55 +200,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   };
 
-  const useVoteOnProposal = (proposalId: any, decision: any, tokenId: any) => {
-    return useCallback(async () => {
-      try {
-        const contractGov = await WRITETOSmartContract(getDAOContract);
-        const transaction = await contractGov.voteOnProposal(
-          address,
-          proposalId,
-          decision,
-          tokenId
-        );
-        console.log("transaction: ", transaction);
-        const receipt = await transaction.wait();
 
-        console.log("receipt: ", receipt);
-
-        if (receipt.status) {
-          return toast.success("Voted Successfully!");
-        }
-        toast.error("Vote Process Failed!");
-      } catch (error) {
-        console.log("error :", error);
-      }
-    }, [decision, proposalId, tokenId]);
-  };
-
-  const useCreateProprosal = (name: string, deadline: any, desc: string) => {
-    return useCallback(async () => {
-      try {
-        if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-        const contractGov = await WRITETOSmartContract(getDAOContract);
-        const transaction = await contractGov.createProposal(
-          name,
-          deadline,
-          desc
-        );
-        console.log("transaction: ", transaction);
-        const receipt = await transaction.wait();
-
-        console.log("receipt: ", receipt);
-
-        if (receipt.status) {
-          return toast.success("Voted Successfully!");
-        }
-        toast.error("Vote Process Failed!");
-      } catch (error) {
-        console.log("error writing to contract :", error);
-      }
-    }, [deadline, desc, name]);
-  };
 
   // /////////////////////////////
   //////////            //////////
@@ -258,9 +208,6 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   //////////           ///////////
   ////////////////////////////////
 
-  const createSale = () => {
-    // Add your create sale logic here
-  };
 
   const fetchNFTs = async (tokenIDs: number[]) => {
     const promises = tokenIDs.map((index) =>
@@ -278,24 +225,17 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return tokensMetadataJson;
   };
 
-  const fetchMyNFTsOrCreatedNFTs = () => {
-    // Add your fetch my NFTs or created NFTs logic here
-  };
-
+ 
   return (
     <NFTContext.Provider
       value={{
         nftCurrency,
-        createSale,
-        fetchMyNFTsOrCreatedNFTs,
-        useCreateProprosal,
         proposal,
         currentAccount,
         isLoadingNFT,
         metaNFTs,
         myTokenIds,
         fetchNFTs,
-        useVoteOnProposal,
       }}
     >
       {children}
