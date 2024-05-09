@@ -31,9 +31,9 @@ const useCreateProprosal = () => {
 
         console.log("receipt: ", receipt);
 
-        if (receipt.status) {
-          router.push("/DAO")
-          return toast.success("Proposal Created!");
+        if (receipt.status) {        
+          toast.success("Proposal Created!");
+          return  router.push("/DAO")
         }
         toast.error("Failed!");
       } catch (error) {
