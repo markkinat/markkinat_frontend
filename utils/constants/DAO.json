@@ -51,25 +51,38 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
-                "name": "",
+                "name": "initiator",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "",
+                "name": "tokenId",
                 "type": "uint256"
             },
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "",
+                "name": "delegatee",
                 "type": "address"
             }
         ],
         "name": "DelegatedVotingPowerSuccessfully",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "proposalId",
+                "type": "uint256"
+            }
+        ],
+        "name": "ExecutedProposalSuccessfully",
         "type": "event"
     },
     {
@@ -95,15 +108,15 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": true,
+                "indexed": false,
                 "internalType": "uint256",
-                "name": "",
+                "name": "proposalId",
                 "type": "uint256"
             },
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "",
+                "name": "initiator",
                 "type": "address"
             }
         ],
@@ -114,21 +127,21 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": true,
+                "indexed": false,
                 "internalType": "uint256",
-                "name": "",
+                "name": "proposalId",
                 "type": "uint256"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
-                "name": "",
+                "name": "decider",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "enum MarkkinatLibrary.VoterDecision",
-                "name": "",
+                "name": "decision",
                 "type": "uint8"
             }
         ],
@@ -142,18 +155,10 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
-                "name": "proposalId",
-                "type": "uint256"
-            }
-        ],
-        "name": "activateProposal",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
+                "internalType": "address",
+                "name": "intiator",
+                "type": "address"
+            },
             {
                 "internalType": "string",
                 "name": "_name",
@@ -179,6 +184,11 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "intiator",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
                 "name": "_delegate",
                 "type": "address"
             },
@@ -200,6 +210,11 @@
     },
     {
         "inputs": [
+            {
+                "internalType": "address",
+                "name": "intiator",
+                "type": "address"
+            },
             {
                 "internalType": "uint256",
                 "name": "proposalId",
@@ -302,7 +317,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "votes",
+                "name": "totalVoters",
                 "type": "uint256"
             },
             {
@@ -380,6 +395,11 @@
     },
     {
         "inputs": [
+            {
+                "internalType": "address",
+                "name": "intiator",
+                "type": "address"
+            },
             {
                 "internalType": "uint256",
                 "name": "proposalId",

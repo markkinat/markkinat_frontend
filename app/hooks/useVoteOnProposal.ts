@@ -44,7 +44,9 @@ const useVoteOnProposal = (proposalId: any, decision: any, tokenId: any) => {
                 errorText = "An unknown error occured!";
             }
 
-            toast.error(`Error: ${errorText}`);
+        toast.error(`Error: ${errorText}`);
+        console.log(error);
+        
         }
       
     }, [address, chainId, decision, proposalId, tokenId, walletProvider]);
