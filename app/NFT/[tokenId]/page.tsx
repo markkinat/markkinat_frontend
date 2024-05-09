@@ -1,33 +1,43 @@
-import CheckoutModal from "@/components/modal/checkoutmodal";
+"use client"
+import { useTheme } from "@/app/context/ThemeProvider";
 
-const NFT = ({params}: {params: { id: number }}) => {
+const Home = ({ params }: { params: { tokenId: string } }) => {
+  const { theme } = useTheme();
+  
   return (
+    <>
     <div className="mt-24 container">
       <div className="lg:flex justify-center">
         <div className="w-[100%] p-12">
           <img src="/nft1.png" alt="NFT" className=" rounded-2xl md:w-[80%]" />
         </div>
         <div className=" md:w-[45%] p-12">
-          <div className="">
+          <div className="space-y-4">
             <h2 className="text-2xl">Abstract Smoke Red Blue</h2>
             <p>
               from
-              <strong className="text-white"> 4.5ETH </strong>
-              20 of 25 available
+              <strong className="text-white"> 0.01ETH </strong>
+              20 of 100 available
             </p>
           </div>
           <div>
             <p>Creator</p>
             <div>
-              <div className="flex">
+              <div className="flex gap-4">
                 <img
                   src="/creator.png"
                   alt="creator"
                   className="rounded-full w-6"
                 />
-                <h3 className="font-bold px-2">Mia&apos;s collection</h3>
+                <h3 className="font-bold px-2">Markkinat&apos;s collection</h3>
               </div>
-              <div role="tablist" className="tabs tabs-bordered mt-24 mb-12">
+              <div className="mt-6">
+                <button onClick={()=>{console.log("clicked");
+                  }} className="btn btn-neutral hover:text-white text-sm w-[45%]">
+                    Mint
+                  </button>
+            </div>  
+              <div role="tablist" className="tabs tabs-bordered mt-12 mb-12">
                 <input
                   type="radio"
                   name="my_tabs_1"
@@ -37,18 +47,16 @@ const NFT = ({params}: {params: { id: number }}) => {
                   defaultChecked
                 />
                 <div role="tabpanel" className="tab-content">
-                  <h4 className="text-justify">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry&apos;s
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book
+                  <h4 className="text-justify leading-7 ">
+                    Markkinat DAO collection: A Rare Integrated NFT Marketplace and Governance, representing a groundbreaking initiative aimed at revolutionizing decentralized governance and economic activity within the blockchain ecosystem.
                   </h4>
                   <div className="flex justify-between mt-4">
-                    <CheckoutModal action="Buy for 4.5ETH"></CheckoutModal>
-                    <button className="btn btn-neutral hover:text-white hover:bg-transparent text-sm w-[45%]">
-                      Make Offer
-                    </button>
+                  
+                      
+                    {/* <button onClick={()=>{console.log("clicked");
+                    }} className="btn btn-neutral hover:text-white hover:bg-transparent text-sm w-[45%]">
+                      Mint
+                    </button> */}
                   </div>
                 </div>
 
@@ -75,8 +83,9 @@ const NFT = ({params}: {params: { id: number }}) => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+     </> 
   );
 };
 
-export default NFT;
+export default Home;

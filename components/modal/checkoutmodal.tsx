@@ -1,14 +1,14 @@
 "use client";
 import { Dialog, Flex, Button } from "@radix-ui/themes";
 import Image from "next/image";
-export interface CheckoutProp {
-  action: string;
-}
 
-const CheckoutModal = (prop: CheckoutProp) => {
+
+const CheckoutModal = ({ action }: any) => {
+  console.log("vvvvvvhgcjhgggvvv");
+  
   return (
     <Dialog.Root>
-      <Dialog.Trigger>{prop.action}</Dialog.Trigger>
+      <Dialog.Trigger>{action}</Dialog.Trigger>
 
       <Dialog.Content
         style={{ maxWidth: "80vw", margin: "auto", height: "100%" }}

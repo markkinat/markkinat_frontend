@@ -8,7 +8,7 @@ const OneNFT = ({ nft }: any) => {
     const { nftCurrency} = useNFTContext()
     const { theme } = useTheme()
   return (
-   <Link href={`/nft/${nft.edition || nft.tokenId}`} className='z-1'>
+   <Link href={`/NFT/${nft.edition || nft.tokenId}`} className='z-1'>
           <div className={`flex-1 min-w-64 max-w-max md:min-w-64 lg:min-w-[300px] ${theme === 'dark' ? 'bg-[#2e2b44]' : 'bg-white'} rounded-2xl p-4 lg:mr-8 mr-6 my-2 mx-2 cursor-pointer shadow-[#251e67] shadow-md`}
             >
                 <div className="relative w-full h-52 sm:h-36 xs:h-56 md:h-60 lg:h-[300px] rounded-2xl overflow-hidden">
