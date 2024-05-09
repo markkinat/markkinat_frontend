@@ -35,8 +35,18 @@ const useVoteOnProposal = (proposalId: any, decision: any, tokenId: any) => {
         }
         toast.error("Vote Process Failed!");
       } catch (error) {
-        console.log("error writing to contract :", error);
-      }
+         let errorText;
+            if (error === "insufficient funds") {
+                errorText = "You have no right to vote!";
+            } else if (error === "Already voted.") {
+                errorText = "You have already voted!";
+            } else {
+                errorText = "An unknown error occured!";
+            }
+
+            toast.error(`Error: ${errorText}`);
+        }
+      
     }, [address, chainId, decision, proposalId, tokenId, walletProvider]);
 }
 

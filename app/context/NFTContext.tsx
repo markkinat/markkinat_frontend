@@ -123,12 +123,14 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       // console.log("tokenCounts COUNT ", tokenCounts);
 
       let calls = [];
-      for (let i = 1; i < 2; i++) {
+      for (let i = 1; i < _proposalCount+1; i++) {
         calls.push({
           target: process.env.NEXT_PUBLIC_DAO_address,
           callData: itf.encodeFunctionData("proposals", [i]),
         });
       }
+      // console.log("TOKEN", tokenCounts);
+      
       if (tokenCounts > 0) {
         for (let i = 1; i < tokenCounts; i++) {
           calls.push({
@@ -178,7 +180,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       console.log("PROPOSALLLLL", prop);
       
       if (tokenCounts > 0) {
-        for (let i = _proposalCount; i < callResults.length; i++) {
+        for (let i = _proposalCount+1; i < callResults.length; i++) {
           mkdaoResponse.push(
             itf2.decodeFunctionResult("ownerOf", callResults[i][1])
           );
