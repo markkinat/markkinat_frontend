@@ -78,7 +78,7 @@ const HotBids = ({ name }: any) => {
                             description: 'Cool NFT on Sale',
                             price: (10 - i * 0.534).toFixed(2),
                             edition: `${i}`,
-                            address: `${slicedSellerAddress}`    
+                            address: `hot-bids`    
                         }}
                         />
                     ))}
