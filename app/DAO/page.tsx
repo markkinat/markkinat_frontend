@@ -143,7 +143,7 @@ const DAO = () => {
               <Loader />
             </div>
           ) : (
-            proposals.length === 0 ? (
+            proposals.length === 1 ? (
               <Text className="text-5xl flexCenter">No Proposal Yet</Text>
             ) : (proposals?.map((prop, index)=>(
               <Link

@@ -30,7 +30,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
     setData(proposal.data[params.daodetailsId])
   }, [params.daodetailsId, proposal]);
 
-  console.log("Proposalsssss ", proposal.data);
+  // console.log("Proposalsssss ", proposal.data);
 
   if (loading) {
     return (

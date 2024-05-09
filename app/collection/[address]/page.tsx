@@ -14,7 +14,7 @@ const Home = ({params}: {params: { address: string }})=> {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSelect, setActiveSelect] = useState("Recently Added");
   const { theme } = useTheme();
-   const items = useMkdaoItems();
+  const items = useMkdaoItems();
 
 useEffect(() => {
   if (Array.isArray(items) && items.length > 0) {
@@ -26,7 +26,7 @@ useEffect(() => {
   }
 }, [items]);
 
-  console.log(nfts);
+  // console.log(nfts);
 
   useEffect(() => {
     const sortedNfts = [...nfts];
