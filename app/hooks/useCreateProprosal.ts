@@ -21,7 +21,7 @@ const useCreateProprosal = () => {
       try {
         if (!isSupportedChain(chainId)) return toast.error("No Wallet Connected or Wrong Network");
         const transaction = await contract.createProposal(
-          // address,
+          address,
           name,
           deadline,
           desc
