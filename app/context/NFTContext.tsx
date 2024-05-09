@@ -132,7 +132,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       // console.log("TOKEN", tokenCounts);
       
       if (tokenCounts > 0) {
-        for (let i = 1; i < tokenCounts-1; i++) {
+        for (let i = 1; i < tokenCounts; i++) {
           calls.push({
             target: process.env.NEXT_PUBLIC_MarkkinatNFT_address,
             callData: itf2.encodeFunctionData("ownerOf", [i]),
@@ -180,7 +180,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       console.log("PROPOSALLLLL", callResults.length);
       
       if (tokenCounts > 0) {
-        for (let i = _proposalCount+1; i < callResults.length; i++) {
+        for (let i = _proposalCount; i < callResults.length; i++) {
           mkdaoResponse.push(
             itf2.decodeFunctionResult("ownerOf", callResults[i][1])
           );
@@ -198,7 +198,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           })
           .filter((index) => index !== -1);
 
-        // console.log("accounts:", myTokens);
+        console.log("accounts:", myTokens);
         setMyTokenIds(myTokens);
       }
     } catch (error) {
