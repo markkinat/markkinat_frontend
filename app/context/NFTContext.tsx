@@ -160,18 +160,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         const obj = proposalResponse[i][0];
         console.log("OBJJJ ", obj);
         
-        // uint256 proposalId;
-        // string name;
-        // string description;
-        // address creator;
-        // uint256 forProposal;
-        // uint256 againstProposal;
-        // uint256 abstainProposal;
-        // mapping(uint256 => bool) voter;
-        // uint256 deadLine;
-        // uint256 totalVoters;
-        // bool isExecuted;
-        // Executed executed;
+        
         prop.push({
           proposalId: Number(proposalResponse[i][0]),
           forProposal: Number(proposalResponse[i][4]),
@@ -186,7 +175,8 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         });
       }
       setProposal({ loading: false, data: prop });
-
+      console.log("PROPOSALLLLL", prop);
+      
       if (tokenCounts > 0) {
         for (let i = _proposalCount; i < callResults.length; i++) {
           mkdaoResponse.push(
