@@ -17,22 +17,17 @@ export interface Listing {
 const useGetAllListings = () => {
   const [listing, setListing] = useState<Listing[]>([]);
   useEffect(() => {
-    const fetchData = async () => {
+    async () => {
       try {
         const MarketPlaceContract = getMarketPlaceContract(readOnlyProvider);
         const transaction = await MarketPlaceContract.getAllListings();
-        const result: any[] = [];
-        transaction.forEach((listing: any) =>{
-          result.push({...listing})
-        })
-        setListing(result);
-        console.log("transaction: ", result);
+        setListing(transaction);
+        console.log("transaction: ", listing);
       } catch (error) {
         console.log("error :", error);
       }
     };
-    fetchData()
-  }, [readOnlyProvider]);
+  });
   return listing;
 };
 
