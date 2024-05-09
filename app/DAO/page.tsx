@@ -33,7 +33,7 @@ const DAO = () => {
     setProposals(proposal.data)
   }, [proposal]);
 
-  console.log("Proposalsssss ", proposals);
+  // console.log("Proposalsssss ", proposals);
 
   return (
     <div className="container m-auto">

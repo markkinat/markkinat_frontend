@@ -39,10 +39,9 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   
   useEffect(() => {
     setLoading(proposal.loading);
-    setData(proposal.data[params.daodetailsId+1])
+    setData(proposal.data[params.daodetailsId])
   }, [params.daodetailsId, proposal]);
 
-  // console.log("Proposalsssss ", proposal.data);
 
   if (loading) {
     return (
@@ -52,6 +51,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
     );
   }
 
+  console.log("Proposalsssss ", data);
 
   return (
     <>
