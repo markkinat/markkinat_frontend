@@ -12,7 +12,7 @@ interface Data {
   forProposal: number;
   againstProposal: number;
   totalabstain: number;
-  deadLine: number;
+  deadLine?: number;
   votes: number;
   executed: boolean;
   description: string;
@@ -28,6 +28,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const [data, setData] = useState<Data>();
   const [vote, setVote] = useState(2);
   const [tokenId, setTokenId] = useState()
+  const [date, setDate] = useState("")
 
   const handleVoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVote(parseInt(e.target.value, 10));
@@ -37,6 +38,13 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   
   const handleVotes = useVoteOnProposal(Number(params.daodetailsId + 1), vote, Number(tokenId));
   console.log("gggggggggggggggggggg",Number(params.daodetailsId + 1),vote,Number(tokenId));
+  
+  useEffect(() => {
+   const deadlineDate = data?.deadLine ? new Date(data.deadLine * 1000) : "May 15, 2024";
+    const formattedDeadline = deadlineDate ? deadlineDate.toLocaleString() : "";
+    setDate(formattedDeadline);
+   
+  }, [data?.deadLine])
   
   
   useEffect(() => {
@@ -197,19 +205,19 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                 <div className="flex gap-2 p-2 items-center justify-between">
                   <div className="flex gap-2">
                     <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
-                    <p>Web3BridgeDAODetails</p>
+                    <p>#{data?.proposalId } MarkkinatDAODetails</p>
                   </div>
                   <div>
                     <h3>For</h3>
                   </div>
                   <div>
-                    <h3 className="">1K VOTES</h3>
+                    <h3 className="">{data?.forProposal}</h3>
                   </div>
                 </div>
-                <div className="flex gap-2 p-2 items-center justify-between">
+                {/* <div className="flex gap-2 p-2 items-center justify-between">
                   <div className="flex gap-2">
                     <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
-                    <p>Web3BridgeDAODetails</p>
+                    <p>#{data?.proposalId } MarkkinatDAODetails</p>
                   </div>
                   <div>
                     <h3>For</h3>
@@ -253,7 +261,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                   <div>
                     <h3>1K VOTES</h3>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="mt-4 flexCenter">
                   <div className="w-1/2 p-2 rounded-3xl border-[0.5px] border-neutral-700 text-center mt-2">
@@ -272,14 +280,14 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     theme === "dark" ? "text-white" : ""
                   } font-bold text-xl`}
                 >
-                  Sales live
+                  Sail live
                 </h3>
               </div>
-              <div className="flex justify-between mt-3">
+              {/* <div className="flex justify-between mt-3">
                 <h3>Strategies</h3>
                 <div className="w-4 h-4 rounded-full bg-neutral-500 md:w-7 md:h-7"></div>
-              </div>
-              <div className="flex justify-between mt-2">
+              </div> */}
+              {/* <div className="flex justify-between mt-2">
                 <h3>IPFS</h3>
                 <div className="flex items-center gap-1">
                   <h3
@@ -308,7 +316,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     />
                   </svg>
                 </div>
-              </div>
+              </div> */}
               <div className="flex justify-between mt-2">
                 <h3>Voting System</h3>
                 <h3
@@ -326,7 +334,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     theme === "dark" ? "text-white" : ""
                   } font-semibold px-1`}
                 >
-                  Apr 17, 2024, 7:10 PM
+                  May 9, 2024, 7:10 AM
                 </h3>
               </div>
               <div className="flex justify-between mt-2">
@@ -336,10 +344,10 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     theme === "dark" ? "text-white" : ""
                   } font-semibold px-1`}
                 >
-                  Apr 17, 2024, 7:10 PM
+                  {date}
                 </h3>
               </div>
-              <div className="flex justify-between mt-2">
+              {/* <div className="flex justify-between mt-2">
                 <h3>Snapshot</h3>
                 <div className="flex items-center">
                   <h3
@@ -368,7 +376,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     />
                   </svg>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div
               className={`${
@@ -381,33 +389,33 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
               <div className="mt-3">
                 <div className="flex justify-between">
                   <h3 className="">For</h3>
-                  <h3 className="">1.3K VOTES 99.53%</h3>
+                  <h3 className="">{data?.forProposal}</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  <p
+                  {/* <p
                     className={`${
                       theme === "dark" ? "bg-white" : "bg-secondary"
                     } w-[98.53%] h-3 rounded-3xl`}
-                  ></p>
+                  ></p> */}
                 </div>
               </div>
               <div className="mt-3">
                 <div className="flex justify-between">
                   <h3 className="">Abstain</h3>
-                  <h3 className="">6 VOTES 0.47%</h3>
+                  <h3 className="">{data?.totalabstain}</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
-                  <p
+                  {/* <p
                     className={`${
                       theme === "dark" ? "bg-white" : "bg-secondary"
                     } w-[3%] h-3 rounded-3xl`}
-                  ></p>
+                  ></p> */}
                 </div>
               </div>
               <div className="mt-3">
                 <div className="flex justify-between">
                   <h3 className="">Against</h3>
-                  <h3 className="">0 VOTES 0%</h3>
+                  <h3 className="">{ data?.againstProposal}</h3>
                 </div>
                 <div className="w-full h-3 rounded-3xl bg-neutral-700">
                   {/* <p className={`${theme === 'dark' ? "bg-white" : "bg-secondary"} w-[98.53%] h-3 rounded-3xl`}></p> */}

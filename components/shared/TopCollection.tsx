@@ -65,10 +65,10 @@ export const columns: ColumnDef<CollectionData>[] = [
     accessorKey: "collection",
     header: "#Collection",
     cell: ({ row }) => (
-      <Link
-        href={"/collection"}
+      <Link 
+        href={"/top-collection"} 
         className="capitalize text-base font-semibold cursor-pointer z-10"
-      >
+        >
         {row.getValue("collection")}
       </Link>
     ),
@@ -87,14 +87,9 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="lowercase text-base font-semibold flexCenter cursor-pointer z-10"
-      >
-        {row.getValue("floor")}
-      </Link>
-    ),
+    
+    cell: ({ row }) => <Link href={"/top-collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer z-10">{row.getValue("floor")}</Link>,
+
   },
   {
     accessorKey: "floor1dPercent",
@@ -110,14 +105,8 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="lowercase text-base font-semibold flexCenter cursor-pointer"
-      >
-        {row.getValue("floor1dPercent")}
-      </Link>
-    ),
+    cell: ({ row }) => <Link href={"/top-collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("floor1dPercent")}</Link>,
+    
   },
   {
     accessorKey: "volume",
@@ -133,14 +122,9 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="lowercase text-base font-semibold flexCenter cursor-pointer"
-      >
-        {row.getValue("volume")}
-      </Link>
-    ),
+
+    cell: ({ row }) => <Link href={"/top-collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("volume")}</Link>,
+    
   },
   {
     accessorKey: "topOffer",
@@ -156,14 +140,9 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="lowercase text-base font-semibold flexCenter cursor-pointer"
-      >
-        {row.getValue("topOffer")}
-      </Link>
-    ),
+
+    cell: ({ row }) => <Link href={"/top-collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("topOffer")}</Link>,
+
   },
   {
     accessorKey: "sales",
@@ -179,14 +158,9 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="tlowercase text-base font-semibold flexCenter cursor-pointer"
-      >
-        {row.getValue("sales")}
-      </Link>
-    ),
+
+    cell: ({ row }) => <Link href={"/top-collection"} className="tlowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("sales")}</Link>,
+
   },
   {
     accessorKey: "marketCap",
@@ -202,16 +176,9 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="lowercase text-base font-semibold flexCenter cursor-pointer"
-      >
-        {row.getValue("marketCap")}
-      </Link>
-    ),
-  },
-  {
+
+    cell: ({ row }) => <Link href={"/top-collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("marketCap")}</Link>,
+  }, {
     accessorKey: "listed",
     header: ({ column }) => {
       return (
@@ -225,14 +192,8 @@ export const columns: ColumnDef<CollectionData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <Link
-        href={"/collection"}
-        className="lowercase text-base font-semibold flexCenter cursor-pointer"
-      >
-        {row.getValue("listed")}
-      </Link>
-    ),
+    cell: ({ row }) => <Link href={"/top-collection"} className="lowercase text-base font-semibold flexCenter cursor-pointer">{row.getValue("listed")}</Link>,
+      
   },
 ];
 
