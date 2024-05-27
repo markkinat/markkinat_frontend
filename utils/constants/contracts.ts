@@ -3,6 +3,7 @@ import Abi from "./DAO.json";
 import multicallAbi from "./multicall.json"
 import markinattAbi from "./Markkinat.json"
 import marketPlaceAbi from "./MarketPlace.json"
+import erc721Abi from "./erc721.json"
 
 export const getDAOContract = (providerOrSigner:any) =>
     new ethers.Contract(
@@ -31,3 +32,10 @@ export const getMKDAOContract = (providerOrSigner:any) =>
          marketPlaceAbi,
         providerOrSigner
     );
+    
+    export const getNFTContract = (assetContract: string, providerOrSigner:any) =>
+        new ethers.Contract(
+            assetContract,
+            erc721Abi,
+            providerOrSigner
+          );
