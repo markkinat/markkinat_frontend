@@ -194,7 +194,10 @@ const Header = () => {
             <li>
               <details>
               <summary>Mint</summary>
-              <ul className="p-2">
+                <ul className="p-2">
+                <li>
+                  <Link href={"/top-collection/create"}>Create</Link>
+                </li>
                 <li>
                   <Link href={"/launchpad"}>Launchpad</Link>
                 </li>

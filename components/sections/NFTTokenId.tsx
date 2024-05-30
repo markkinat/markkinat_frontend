@@ -1,15 +1,11 @@
-import { useState } from 'react';
 import { useTheme } from '@/app/context/ThemeProvider';
 import Image from 'next/image';
 
-const NFTTokenId = ({ nft, onNFTSelect }: any) => {
+const NFTTokenId = ({ nft, onNFTSelect,tokenId }: any) => {
   const { theme } = useTheme();
-  const [selected, setSelected] = useState(false);
 
   const handleNFTSelect = () => {
-    // Call the onNFTSelect function with the tokenId
     onNFTSelect(nft.edition);
-    setSelected(true); // Set selected state to true when clicked
   };
 
   return (
@@ -18,7 +14,7 @@ const NFTTokenId = ({ nft, onNFTSelect }: any) => {
         className={`flex-1 min-w-64 ${
           theme === 'dark' ? 'bg-[#2e2b44]' : 'bg-white'
         } rounded-2xl p-4 lg:mr-8 mr-6 my-2 mx-2 cursor-pointer shadow-[#251e67] shadow-md ${
-          selected ? 'opacity-50' : '' // Apply opacity if selected
+          tokenId === nft.edition ? 'opacity-50' : ' ' 
         }`}
         onClick={handleNFTSelect}
       >

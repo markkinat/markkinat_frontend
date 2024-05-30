@@ -33,18 +33,18 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   const handleVoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVote(parseInt(e.target.value, 10));
    };
-  // console.log("PARAMSSSSS ", params.daodetailsId);
-  // console.log(vote);
-  
-  const handleVotes = useVoteOnProposal(Number(params.daodetailsId + 1), vote, Number(tokenId));
-  console.log("gggggggggggggggggggg",Number(params.daodetailsId + 1),vote,Number(tokenId));
+ 
+  const handleVotes = useVoteOnProposal((Number(params.daodetailsId) + 1), vote, Number(tokenId));
+  // console.log("gggggggggggggggggggg",(Number(params.daodetailsId) + 1),vote,Number(tokenId));
   
   useEffect(() => {
    const deadlineDate = data?.deadLine ? new Date(data.deadLine * 1000) : "May 15, 2024";
     const formattedDeadline = deadlineDate ? deadlineDate.toLocaleString() : "";
+    console.log("FORMATTED", formattedDeadline);
+    
     setDate(formattedDeadline);
    
-  }, [data?.deadLine])
+  }, [data])
   
   
   useEffect(() => {

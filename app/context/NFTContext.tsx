@@ -35,6 +35,11 @@ type NFTContextType = {
   metaNFTs: any[] | null;
   myTokenIds: number[] | null;
   fetchNFTs: any;
+  preSale: any;
+  pause: any;
+  checkPause: any;
+  presaleStarted: any;
+  owner: any;
 };
 
 // Create the context
@@ -50,7 +55,7 @@ export const useNFTContext = () => {
 };
 
 const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const {  address } = useWeb3ModalAccount();
+  const {  address, chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
   const [myTokenIds, setMyTokenIds] = useState<number[]>([]);
 
@@ -69,7 +74,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const WRITETOSmartContract = async (contractType: any) => {
     try {
       const readWriteProvider = getProvider(walletProvider);
-      const signer = readWriteProvider.getSigner();
+      const signer = await readWriteProvider.getSigner();
       const contract = contractType(signer);
       console.log(contract);
       
@@ -119,7 +124,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       const _proposalCount = Number(data);
       const tokenCounts = Number(data2);
-      console.log("PROPOSAL COUNT ", _proposalCount);
+      // console.log("PROPOSAL COUNT ", _proposalCount);
       // console.log("tokenCounts COUNT ", tokenCounts);
 
       let calls = [];
@@ -155,12 +160,12 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           itf.decodeFunctionResult("proposals", callResults[i][1])
         );
       }
-      console.log("RESPONSE ", proposalResponse);
+      // console.log("RESPONSE ", proposalResponse);
 
       let prop = [];
       for (let i = 0; i < proposalResponse.length; i++) {
-        const obj = proposalResponse[i][0];
-        console.log("OBJJJ ", obj);
+        // const obj = proposalResponse[i][0];
+        // console.log("OBJJJ ", obj);
         
         
         prop.push({
@@ -168,16 +173,16 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           forProposal: Number(proposalResponse[i][4]),
           againstProposal: Number(proposalResponse[i][5]),
           totalabstain: Number(proposalResponse[i][6]),
-          deadLine: Number(proposalResponse[i][8]),
-          votes: Number(proposalResponse[i][9]),
-          executed: proposalResponse[i][10],
+          deadLine: Number(proposalResponse[i][7]),
+          votes: Number(proposalResponse[i][8]),
+          executed: proposalResponse[i][9],
           name: proposalResponse[i][1],
           description: proposalResponse[i][2],
           creator: proposalResponse[i][3],
         });
       }
       setProposal({ loading: false, data: prop });
-      console.log("PROPOSALLLLL", callResults.length);
+      // console.log("PROPOSALLLLL", prop);
       
       if (tokenCounts > 0) {
         for (let i = _proposalCount; i < callResults.length; i++) {
@@ -198,7 +203,7 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           })
           .filter((index) => index !== -1);
 
-        console.log("accounts:", myTokens);
+        // console.log("accounts:", myTokens);
         setMyTokenIds(myTokens);
       }
     } catch (error) {
@@ -231,7 +236,101 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return tokensMetadataJson;
   };
 
+
+  // ONLY OWNER
+
+  const checkPause = async () => {
+    const contract = getMKDAOContract(readOnlyProvider)
+
+    const data = await contract._paused();
+    // console.log("DATTAAAA ", data);
+    
+    return data;   
+  };
+  
+  const presaleStarted = async () => {
+    const contract = getMKDAOContract(readOnlyProvider)
+
+    const data = await contract.presaleStarted();
+    // console.log("DATTAAAA222 ", data);
+    
+    return data;   
+  };
+
+  const owner = async () => {
+  const contract = getMKDAOContract(readOnlyProvider)
+
+  const data = await contract.owner();
+  console.log("OWNER ", data);
+  
+  return data;   
+  };
+
+  const preSale = async () => {
+    const contract = await WRITETOSmartContract(getMKDAOContract)
+    const data = await checkPause()
+    const data2 = await presaleStarted()
+    if (data && data2) {
+      try {
+        if (!isSupportedChain(chainId)) return toast.error("No Wallet Connected or Wrong Network");
+        const transaction = await contract.setPaused(false);
+        // console.log("transaction: ", transaction);
+        const receipt = await transaction.wait();
+
+        // console.log("receipt: ", receipt);
+
+        if (receipt.status) {
+          return toast.success("UnPaused!!!");
+        }
+        toast.error("Not UnPause!");
+      } catch (error) {
+        console.log("error writing to contract :", error);
+      }
+    } else {
+      try {
+        if (!isSupportedChain(chainId)) return toast.error("No Wallet Connected or Wrong Network");
+        const transaction = await contract.reserveMarkkinat();
+        // console.log("transaction: ", transaction);
+        const receipt = await transaction.wait();
+
+        // console.log("receipt: ", receipt);
+
+        if (receipt.status) {
+          const transaction2 = await contract.startPresale();
+          // console.log("transaction22: ", transaction2);
+          const receipt2 = await transaction2.wait();
+
+          // console.log("receipt22: ", receipt2);
+          return toast.success("reserveMarkkinat!!!");
+        }
+        toast.error("Not reserved!");
+      } catch (error) {
+        console.log("error writing to contract :", error);
+      }
+    }
+  };
  
+  const pause = async () => {
+    const contract = await WRITETOSmartContract(getMKDAOContract)
+
+    try {
+        if (!isSupportedChain(chainId)) return toast.error("No Wallet Connected or Wrong Network");
+        const transaction = await contract.setPaused(true);
+        // console.log("transaction: ", transaction);
+        const receipt = await transaction.wait();
+
+        // console.log("receipt: ", receipt);
+
+      if (receipt.status) {
+          return toast.success("Paused!!!");  
+        }
+        toast.error("Not Pause!");
+      } catch (error) {
+        console.log("error writing to contract :", error);
+      }
+
+  };
+
   return (
     <NFTContext.Provider
       value={{
@@ -242,6 +341,11 @@ const NFTProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         metaNFTs,
         myTokenIds,
         fetchNFTs,
+        preSale,
+        pause,
+        checkPause,
+        presaleStarted,
+        owner,
       }}
     >
       {children}

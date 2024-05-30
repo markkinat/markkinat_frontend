@@ -4,13 +4,13 @@ import { Dialog, Button, Flex, Text, TextField } from "@radix-ui/themes";
 import NFTTokenId from '../sections/NFTTokenId';
 import { useNFTContext } from '@/app/context/NFTContext';
 
-const NFTToken = ({Vote, handleVote,setTokenId}:any) => {
+const NFTToken = ({Vote, handleVote,setTokenId, tokenId}:any) => {
   const { metaNFTs } = useNFTContext();
 
   const handleNFTSelect = (selectedTokenId: any) => {
     setTokenId(selectedTokenId);
   };
-  console.log(metaNFTs);
+  // console.log("METANFTSSS",metaNFTs);
   
   return (
     <Dialog.Root>
@@ -23,13 +23,14 @@ const NFTToken = ({Vote, handleVote,setTokenId}:any) => {
 
         <Flex direction="column" gap="3">
           <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
-            {metaNFTs?.length === 0 ? (
-              <Text>No NFT owned yet</Text>
+            {metaNFTs === null? (
+              <Text className='text-nft-black-2 flexCenter'>No NFT owned yet. Purchase MKDAO Collection to Vote</Text>
           ) : (
               metaNFTs?.map((item, i) => (
                 <div key={`nft-${i}`} className='cc'>  
                   <NFTTokenId
                     onNFTSelect={handleNFTSelect}
+                    tokenId = {tokenId}
                     nft={{
                       i,
                       name: `${item.name}`,

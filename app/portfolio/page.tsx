@@ -70,7 +70,7 @@ const Home = () => {
   }
   return (
     <div className='w-11/12 m-auto'>
-          <div className='py-16'>
+        <div className='py-16'>
         <div className="w-full flex justify-start items-center flex-col min-h-screen">
       <div className="w-full flexCenter flex-col">
         <Banner

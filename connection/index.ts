@@ -1,17 +1,17 @@
 "use client"
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
 
-// export const SUPPORTED_CHAIN = 11155111;
-export const SUPPORTED_CHAIN = 31337;
+export const SUPPORTED_CHAIN = 11155111;
+// export const SUPPORTED_CHAIN = 31337;
 
 
-// const sepolia = {
-//     chainId: SUPPORTED_CHAIN,
-//     name: "Sepolia",
-//     currency: "ETH",
-//     explorerUrl: "https://sepolia.etherscan.io",
-//     rpcUrl: process.env.NEXT_PUBLIC_rpc_url || "",
-// };
+const sepolia = {
+    chainId: SUPPORTED_CHAIN,
+    name: "Sepolia",
+    currency: "ETH",
+    explorerUrl: "https://sepolia.etherscan.io",
+    rpcUrl: process.env.NEXT_PUBLIC_rpc_url || "",
+};
 
 const local = {
     chainId: SUPPORTED_CHAIN,
@@ -31,7 +31,7 @@ const metadata = {
 export const configureWeb3Modal = () =>
     createWeb3Modal({
         ethersConfig: defaultConfig({ metadata }),
-        chains: [local],
+        chains: [sepolia],
         projectId: process.env.NEXT_PUBLIC_PROJECT_ID || "",
         enableAnalytics: false, // Optional - defaults to your Cloud configuration
     });
