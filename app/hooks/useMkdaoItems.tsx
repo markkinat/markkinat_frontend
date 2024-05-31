@@ -1,5 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
+import { readOnlyProvider } from "@/utils/constants/providers";
+import { getMKDAOContract } from "@/utils/constants/contracts";
 
 const useMkdaoItems = () => {
    const [data, setData] = useState<any[]>([]);
@@ -7,8 +9,13 @@ const useMkdaoItems = () => {
 
     useEffect(() => {
         (async () => {
-            const tokenIDs = [...Array.from({ length: 80 })].map(
-                (_, index) => index+21
+            const contract = getMKDAOContract(readOnlyProvider);
+            const minted = await contract.tokenIds()
+            const mintedNo = Number(minted)
+            // console.log("mintedNo", mintedNo+1);
+            const lgth = 100 - mintedNo 
+            const tokenIDs = [...Array.from({ length: lgth })].map(
+                (_, index) => index + mintedNo + 1
             );
 
             const promises = tokenIDs.map((index) =>

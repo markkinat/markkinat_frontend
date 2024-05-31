@@ -2,12 +2,14 @@ import { getMKDAOContract } from '@/utils/constants/contracts';
 import { getProvider, isSupportedChain } from '@/utils/constants/providers';
 import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react';
 import { ethers } from 'ethers';
+import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react'
 import { toast } from 'react-toastify';
 
 const useMints = () => {
   const { walletProvider } = useWeb3ModalProvider();
   const { address, chainId } = useWeb3ModalAccount();
+  const router = useRouter()
 
   return useCallback(async () => {
       const readWriteProvider = getProvider(walletProvider);
@@ -28,13 +30,14 @@ const useMints = () => {
         console.log("receipt: ", receipt);
 
         if (receipt.status) {
-          return toast.success("Minted Successfully!");
+          toast.success("Minted Successfully!");
+          return  router.push("/")
         }
         toast.error("Minting failed!");
       } catch (error) {
         console.log("error writing to contract :", error);
       }
-    }, [chainId, walletProvider]);
+    }, [chainId, router, walletProvider]);
 }
 
 export default useMints

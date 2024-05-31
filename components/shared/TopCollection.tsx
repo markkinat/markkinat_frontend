@@ -38,9 +38,9 @@ import useGetAllListings from "@/app/hooks/useGetAllListings";
 
 export type CollectionData = {
   collection: string;
-  floor: number;
+  floor: any;
   floor1dPercent: number;
-  volume: number;
+  volume: any;
   topOffer: number;
   sales: number;
   marketCap: number;
@@ -210,7 +210,7 @@ export function TopCollection() {
 
   const list: CollectionData[] = listings.map((item) => ({
     collection: item.tokenId,
-    floor: item.price,
+    floor: item?.price,
     floor1dPercent: 5,
     volume: item.quantity,
     topOffer: 115,
