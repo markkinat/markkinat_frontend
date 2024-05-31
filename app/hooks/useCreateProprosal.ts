@@ -26,10 +26,10 @@ const useCreateProprosal = () => {
           deadline,
           desc
         );
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
 
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
 
         if (receipt.status) {        
           toast.success("Proposal Created!");

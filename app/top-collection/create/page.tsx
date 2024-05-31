@@ -2,6 +2,7 @@
 import { FormEvent, useState } from "react";
 import { useTheme } from "@/app/context/ThemeProvider";
 import useCreateListing from "@/app/hooks/useCreateListing";
+import { Button } from "@/components/ui/button";
 
 export interface CreateListing {
   assetContract: string;
@@ -50,118 +51,132 @@ const CreateListing = () => {
   };
 
   return (
-    <div className="container mt-24 mb-12">
-      <form onSubmit={handleSubmit} className="gap-6 text-white w-full">
-        <div className="py-10 flex justify-between">
-          <div className="w-full pr-5">
-            <div className="flex flex-col"></div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                assetAddress <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                className="input border border-nft-black-2 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-3xl"
-                placeholder=""
-                value={assetAddress}
-                onChange={(e) => setAssetAddress(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                Token ID <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                className="input border border-nft-black-2 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-3xl"
-                placeholder=""
-                value={tokenId}
-                onChange={(e) => setTokenId(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                Quantity <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                className="input border border-nft-black-2 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-3xl"
-                placeholder=""
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                Currency address<span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                className="input border border-nft-black-2 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-3xl"
-                placeholder=""
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                Price <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                className="input border border-nft-black-2 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-3xl"
-                placeholder=""
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                Start Date <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="date"
-                className="input border-nft-black-2 bg-[#0e0c15]/90 outline-none w-full placeholder:text-neutral-500 rounded-3xl"
-                placeholder=""
-                value={startTimestamp}
-                onChange={(e) => setStartTimestamp(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className={`${theme === "dark" ? "" : "text-black"} text-xl`}
-              >
-                End Date <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="date"
-                className="input border-nft-black-2 bg-[#0e0c15]/90 outline-none w-full placeholder:text-neutral-500 rounded-3xl"
-                placeholder=""
-                value={endTimestamp}
-                onChange={(e) => setEndTimestamp(e.target.value)}
-              />
-            </div>
-            <div className="flex">
-              <button
-                type="submit"
-                className="bg-white rounded-full py-2 text-black font-bold"
-              >
-                Submit
-              </button>
-            </div>
+    <div className="container mt-24 mb-12 mx-auto px-4">
+      <form onSubmit={handleSubmit} className="space-y-6 text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Asset Address <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              className="input border border-gray-400 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-lg px-4 py-2"
+              value={assetAddress}
+              onChange={(e) => setAssetAddress(e.target.value)}
+              required
+            />
           </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Token ID <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              className="input border border-gray-400 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-lg px-4 py-2"
+              value={tokenId}
+              onChange={(e) => setTokenId(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Quantity <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="number"
+              className="input border border-gray-400 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-lg px-4 py-2"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              required
+            />
+          </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Currency Address <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              className="input border border-gray-400 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-lg px-4 py-2"
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Price <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              className="input border border-gray-400 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-lg px-4 py-2"
+              value={price}
+              onChange={(e) => setPrice(Number(e.target.value))}
+              required
+            />
+          </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Start Date <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="date"
+              className="input border border-gray-400 bg-[#0e0c15]/90 outline-none w-full placeholder:text-neutral-500 rounded-lg px-4 py-2"
+              value={startTimestamp}
+              onChange={(e) => setStartTimestamp(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              End Date <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="date"
+              className="input border border-gray-400 bg-[#0e0c15]/90 outline-none w-full placeholder:text-neutral-500 rounded-lg px-4 py-2"
+              value={endTimestamp}
+              onChange={(e) => setEndTimestamp(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex items-center mt-4">
+            <input
+              type="checkbox"
+              className="form-checkbox h-6 w-6 text-gray-600 mr-4"
+              checked={reserved}
+              onChange={(e) => setReserved(e.target.checked)}
+            />
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Reserved
+            </label>
+          </div>
+          <div>
+            <label className={`block text-lg font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+              Token Type
+            </label>
+            <select
+              className="input border border-gray-400 outline-none w-full placeholder:text-neutral-500 bg-[#0e0c15]/90 rounded-lg px-4 py-2"
+              value={tokenType}
+              onChange={(e) => setTokenType(Number(e.target.value))}
+            >
+              <option value={0}>ERC721</option>
+              <option value={1}>ERC1155</option>
+            </select>
+          </div>
+        </div>
+        <div className="mt-8 w-full flex justify-center mt-8">
+          <Button
+            type="submit"
+            className="px-24 bg-blue-600 hover:btn-primary text-white hover:text-white font-bold rounded-md mx-6"
+          >
+            Create Listing
+          </Button>
+
+          <Button
+            type="submit"
+            className='px-24 rounded-md bg-gradient-to-r from-[#C053AB] to-[#F4E077] text-black mx-6'>
+              Create Bid
+            </Button>
         </div>
       </form>
     </div>

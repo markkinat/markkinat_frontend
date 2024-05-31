@@ -40,7 +40,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
   useEffect(() => {
    const deadlineDate = data?.deadLine ? new Date(data.deadLine * 1000) : "May 15, 2024";
     const formattedDeadline = deadlineDate ? deadlineDate.toLocaleString() : "";
-    console.log("FORMATTED", formattedDeadline);
+    // console.log("FORMATTED", formattedDeadline);
     
     setDate(formattedDeadline);
    
@@ -61,7 +61,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
     );
   }
 
-  console.log("Proposalsssss ", data);
+  // console.log("Proposalsssss ", data);
 
   return (
     <>
