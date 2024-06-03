@@ -67,7 +67,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
     <>
       <div className="md:w-11/12 mt-24 mb-12 m-auto">
         <div className="p-10 md:flex">
-          <div className="flex flex-col gap-8 px-5 text-neutral-100">
+          <div className="flex flex-col gap-8 px-5 text-neutral-100 md:w-4/6">
             <div className="flex gap-2 items-center">
               <div className="flex items-center">
                 <div className="mr-">
@@ -280,7 +280,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     theme === "dark" ? "text-white" : ""
                   } font-bold text-xl`}
                 >
-                  Sail live
+                  Details
                 </h3>
               </div>
               {/* <div className="flex justify-between mt-3">
@@ -334,7 +334,7 @@ const DAODetails = ({params}: {params: { daodetailsId: string }}) => {
                     theme === "dark" ? "text-white" : ""
                   } font-semibold px-1`}
                 >
-                  May 9, 2024, 7:10 AM
+                  June 3, 2024, 7:10 PM
                 </h3>
               </div>
               <div className="flex justify-between mt-2">
