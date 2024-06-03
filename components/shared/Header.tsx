@@ -57,10 +57,10 @@ const Header = () => {
                    <Link href={"/top-collection"}>Collections</Link>
                   </li>
                   <li>
-                    <Link href={"/mkndao"}>MKNDAO</Link>
+                    <Link href={`/collection/${process.env.NEXT_PUBLIC_MarkkinatNFT_address}`}>MKNDAO</Link>
                   </li>
                   <li>
-                    <Link href={"/hot-bids"}>Hot Bids</Link>
+                    <Link href={"/collection/hot-bids"}>Hot Bids</Link>
                   </li>
                 </ul>
               </li>
@@ -74,6 +74,9 @@ const Header = () => {
                
               <a>Mint</a>
               <ul className="p-2">
+                <li>
+                  <Link href={"/top-collection/create"}>Create</Link>
+                </li>
                 <li>
                   <Link href={"/launchpad"}>Launchpad</Link>
                 </li>
